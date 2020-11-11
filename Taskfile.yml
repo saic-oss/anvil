@@ -20,9 +20,9 @@ tasks:
     dir: src/docker
     vars:
       TAG: '{{ coalesce .TAG "<no value>" }}'
-      preconditions:
-        - sh: test "{{.TAG}}" != "<no value>"
-          msg: Required variable 'TAG' not set
+    preconditions:
+      - sh: test "{{.TAG}}" != "<no value>"
+        msg: Required variable 'TAG' not set
     cmds:
       - docker build --pull . -t {{.FULLY_QUALIFIED_IMAGE_NAME}}:{{.TAG}}
 
