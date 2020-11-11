@@ -267,10 +267,14 @@ RUN asdf plugin add maven \
   && asdf global maven "${MAVEN_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Support asdf when running as root user
+# Support tools installed as anvil when running as root user
 USER root
 ENV ASDF_DATA_DIR="/home/anvil/.asdf"
 RUN cp /home/anvil/.tool-versions /root/.tool-versions
+ENV HELM_PLUGINS="/home/anvil/.local/share/helm/plugins"
+ENV HELM_REGISTRY_CONFIG="/home/anvil/.config/helm/registry.json"
+ENV HELM_REPOSITORY_CACHE="/home/anvil/.cache/helm/repository"
+ENV HELM_REPOSITORY_CONFIG="/home/anvil/.config/helm/repositories.yaml"
 USER anvil
 
 CMD ["/bin/bash"]
