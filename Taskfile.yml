@@ -1,0 +1,15 @@
+# https://taskfile.dev
+
+version: "2"
+
+tasks:
+  validatePreCommitHooks:
+    desc: Validate the pre-commit hooks
+    cmds:
+      - pre-commit install
+      - pre-commit run -a
+
+  example:
+    desc: Example to show the formatting of a task
+    cmds:
+      - echo "Peter Piper picked a peck of pickled peppers"
