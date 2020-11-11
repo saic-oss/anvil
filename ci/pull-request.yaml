@@ -1,7 +1,7 @@
 version: "1.0"
 
 indicators:
-  - image: &dadsgarage dadsgarage/dadsgarage:0.3.6
+  - image: &dadsgarage dadsgarage/dadsgarage:0.3.7
 
 stages:
   - "clone"
