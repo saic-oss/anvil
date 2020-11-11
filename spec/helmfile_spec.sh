@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     helmfile --version | grep "${HELMFILE_VERSION}"

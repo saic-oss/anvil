@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     aws --version | grep "${AWS_CLI_VERSION}"

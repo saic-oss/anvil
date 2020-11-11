@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     task --version 2>&1 | grep "${GO_TASK_VERSION}"

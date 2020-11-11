@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     kubectl version --client=true | grep "${KUBECTL_VERSION}"

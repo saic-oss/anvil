@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     helm plugin list | grep "diff" | grep "${HELM_DIFF_VERSION}"

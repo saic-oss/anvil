@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     docker-compose --version | grep "${DOCKER_COMPOSE_VERSION}"

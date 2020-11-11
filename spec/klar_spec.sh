@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     # Klar doesn't have a command to display its version, so we are just making sure we are getting output that we expect

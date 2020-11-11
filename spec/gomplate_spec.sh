@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     gomplate --version | grep "${GOMPLATE_VERSION}"

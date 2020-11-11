@@ -30,10 +30,7 @@ repos:
     rev: v0.1.10
     hooks:
       - id: shellcheck
-        exclude: |
-          (?x)^(
-            gradlew
-          )$
+        exclude: spec/*
   - repo: https://github.com/prettier/prettier
     rev: 2.1.2
     hooks:

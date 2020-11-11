@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 #shellcheck shell=sh
 
 # set -eu

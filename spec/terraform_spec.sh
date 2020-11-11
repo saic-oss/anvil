@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     terraform --version | grep "${TERRAFORM_VERSION}"

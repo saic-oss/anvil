@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     # The string used in the JAVA_VERSION doesn't appear in java -version

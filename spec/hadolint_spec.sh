@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     hadolint --version | grep "${HADOLINT_VERSION}"

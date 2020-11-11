@@ -1,4 +1,6 @@
-Describe "printVersion()"
+#!/usr/bin/env shellspec
+
+escribe "printVersion()"
   printVersion() {
     tfsec --version | grep "${TFSEC_VERSION}"
   }

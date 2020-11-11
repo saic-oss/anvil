@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     shellspec --version | grep "${SHELLSPEC_VERSION}"

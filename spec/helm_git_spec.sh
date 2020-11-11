@@ -1,3 +1,5 @@
+#!/usr/bin/env shellspec
+
 Describe "printVersion()"
   printVersion() {
     helm plugin list | grep "helm-git" | grep "${HELM_GIT_VERSION}"
