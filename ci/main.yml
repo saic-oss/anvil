@@ -1,7 +1,7 @@
 version: "1.0"
 
 indicators:
-  - image: &dadsgarage dadsgarage/dadsgarage:0.3.7
+  - image: &anvil saicoss/anvil:0.5.0
 
 stages:
   - "clone"
@@ -22,7 +22,7 @@ steps:
   validate:
     title: "Validating project"
     type: "freestyle"
-    image: *dadsgarage
+    image: *anvil
     working_directory: "${{clone}}"
     stage: "validate"
     environment:
@@ -54,7 +54,7 @@ steps:
   secure:
     title: "Running automated security checks"
     type: "freestyle"
-    image: *dadsgarage
+    image: *anvil
     working_directory: "${{clone}}"
     stage: "secure"
     commands:
