@@ -62,7 +62,7 @@ steps:
       - task secure
 
   deliver:
-    title: "Pushing edge image"
+    title: "Pushing release and latest image"
     type: "push"
     candidate: "${{build_tmp_image}}"
     image_name: "saicoss/anvil"
