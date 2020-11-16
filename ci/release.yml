@@ -1,0 +1,71 @@
+version: "1.0"
+
+indicators:
+  - image: &dadsgarage dadsgarage/dadsgarage:0.3.7
+
+stages:
+  - "clone"
+  - "validate"
+  - "test"
+  - "secure"
+  - "deliver"
+
+steps:
+  clone:
+    title: "Cloning repository"
+    type: "git-clone"
+    repo: "${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}"
+    revision: "${{CF_BRANCH}}"
+    git: "github"
+    stage: "clone"
+
+  validate:
+    title: "Validating project"
+    type: "freestyle"
+    image: *dadsgarage
+    working_directory: "${{clone}}"
+    stage: "validate"
+    environment:
+      - "PRE_COMMIT_HOME=/codefresh/volume/pre-commit-cache"
+    commands:
+      - asdf install
+      - task validate
+
+  build_tmp_image:
+    title: "Building temporary image"
+    type: "build"
+    stage: "test"
+    image_name: "saicoss/tmp"
+    working_directory: "${{clone}}/src/docker"
+    tag: "${{CF_REVISION}}"
+    dockerfile: "Dockerfile"
+    registry: "dockerhub"
+
+  test:
+    title: "Running automated tests"
+    type: "freestyle"
+    image: "${{build_tmp_image}}"
+    working_directory: "${{clone}}"
+    stage: "test"
+    commands:
+      - task codefresh:test
+
+  secure:
+    title: "Running automated security checks"
+    type: "freestyle"
+    image: *dadsgarage
+    working_directory: "${{clone}}"
+    stage: "secure"
+    commands:
+      - asdf install
+      - task secure
+
+  deliver:
+    title: "Pushing edge image"
+    type: "push"
+    candidate: "${{build_tmp_image}}"
+    image_name: "saicoss/anvil"
+    stage: "deliver"
+    tags:
+      - "latest"
+      - "${{CF_BRANCH}}"
