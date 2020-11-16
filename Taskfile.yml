@@ -2,14 +2,55 @@
 
 version: "2"
 
+vars:
+  DOCKER_REGISTRY: docker.io
+  GROUP_NAME: saicoss
+  IMAGE_NAME: anvil
+  FULLY_QUALIFIED_IMAGE_NAME: "{{.DOCKER_REGISTRY}}/{{.GROUP_NAME}}/{{.IMAGE_NAME}}"
+
 tasks:
-  validatePreCommitHooks:
+  validate:
     desc: Validate the pre-commit hooks
     cmds:
       - pre-commit install
       - pre-commit run -a
 
-  example:
-    desc: Example to show the formatting of a task
+  build:
+    desc: Build the docker image (does not work on codefresh)
+    dir: src/docker
+    vars:
+      TAG: '{{ coalesce .TAG "<no value>" }}'
+    preconditions:
+      - sh: test "{{.TAG}}" != "<no value>"
+        msg: Required variable 'TAG' not set
     cmds:
-      - echo "Peter Piper picked a peck of pickled peppers"
+      - docker build --pull . -t {{.FULLY_QUALIFIED_IMAGE_NAME}}:{{.TAG}}
+
+  test:
+    desc: Run automated tests (does not work on codefresh)
+    vars:
+      TAG: '{{ coalesce .TAG "<no value>" }}'
+    preconditions:
+      - sh: test "{{.TAG}}" != "<no value>"
+        msg: Required variable 'TAG' not set
+    cmds:
+      - docker run --rm -v $(pwd):/workdir -w /workdir {{.FULLY_QUALIFIED_IMAGE_NAME}}:{{.TAG}} shellspec
+
+  codefresh:test:
+    cmds:
+      - shellspec
+
+  secure:
+    desc: Run automated security checks
+    cmds:
+      - echo "N/A"
+
+  deliver:
+    desc: Deliver artifact
+    cmds:
+      - echo "N/A"
+
+  deploy:
+    desc: Deploy project
+    cmds:
+      - echo "N/A"
