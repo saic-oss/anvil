@@ -65,6 +65,7 @@ steps:
     title: "Pushing edge image"
     type: "push"
     candidate: "${{build_tmp_image}}"
+    registry: "dockerhub"
     image_name: "saicoss/anvil"
     tag: "edge"
     stage: "deliver"
