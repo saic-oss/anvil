@@ -27,6 +27,7 @@ steps:
     stage: "validate"
     environment:
       - "PRE_COMMIT_HOME=/codefresh/volume/pre-commit-cache"
+      - "SKIP=no-commit-to-branch"
     commands:
       - asdf install
       - task validate
