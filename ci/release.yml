@@ -62,9 +62,10 @@ steps:
       - task secure
 
   deliver:
-    title: "Pushing edge image"
+    title: "Pushing release and latest image"
     type: "push"
     candidate: "${{build_tmp_image}}"
+    registry: "dockerhub"
     image_name: "saicoss/anvil"
     stage: "deliver"
     tags:
