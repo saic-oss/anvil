@@ -70,7 +70,7 @@ RUN git clone --branch "${SHELLSPEC_VERSION}" --depth 1 https://github.com/shell
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install go-task. Get versions from https://github.com/go-task/task/releases
-ARG GO_TASK_VERSION="2.8.1"
+ARG GO_TASK_VERSION="3.0.0"
 ENV GO_TASK_VERSION=${GO_TASK_VERSION}
 # hadolint ignore=DL3003
 RUN wget -O /root/task.tar.gz "https://github.com/go-task/task/releases/download/v${GO_TASK_VERSION}/task_linux_amd64.tar.gz" \
