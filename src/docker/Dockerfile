@@ -267,6 +267,14 @@ RUN asdf plugin add maven \
   && asdf global maven "${MAVEN_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# Install chart-releaser. Get versions using 'asdf list all helm-cr'
+ARG CHART_RELEASER_VERSION="1.1.1"
+ENV CHART_RELEASER_VERSION=${CHART_RELEASER_VERSION}
+RUN asdf plugin add helm-cr \
+  && asdf install helm-cr "${CHART_RELEASER_VERSION}" \
+  && asdf global helm-cr "${CHART_RELEASER_VERSION}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 # Support tools installed as anvil when running as root user
 USER root
 ENV ASDF_DATA_DIR="/home/anvil/.asdf"
