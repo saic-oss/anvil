@@ -34,6 +34,7 @@ RUN dnf install -y \
   container-selinux \
   gcc \
   gcc-c++ \
+  gettext \
   git \
   jq \
   libffi-devel \
