@@ -276,6 +276,22 @@ RUN asdf plugin add helm-cr \
   && asdf global helm-cr "${CHART_RELEASER_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# Install golang. Get versions using 'asdf list all golang'
+ARG GO_VERSION="1.15.6"
+ENV GO_VERSION=${GO_VERSION}
+RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git \
+  && asdf install golang "${GO_VERSION}" \
+  && asdf global golang "${GO_VERSION}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+# Install golangci-lint. Get versions using asdf list all golangci-lint
+ARG GOLANGCI_LINT_VERSION="1.34.1"
+ENV GOLANGCI_LINT_VERSION=${GOLANGCI_LINT_VERSION}
+RUN asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lint.git \
+  && asdf install golangci-lint "${GOLANGCI_LINT_VERSION}" \
+  && asdf global golangci-lint "${GOLANGCI_LINT_VERSION}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 # Install goreleaser. Get versions using 'asdf list all goreleaser'
 ARG GORELEASER_VERSION="0.151.1"
 ENV GORELEASER_VERSION=${GORELEASER_VERSION}
