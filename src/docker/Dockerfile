@@ -276,6 +276,14 @@ RUN asdf plugin add helm-cr \
   && asdf global helm-cr "${CHART_RELEASER_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# Install goreleaser. Get versions using 'asdf list all goreleaser'
+ARG GORELEASER_VERSION="0.151.1"
+ENV GORELEASER_VERSION=${GORELEASER_VERSION}
+RUN asdf plugin-add goreleaser https://github.com/kforsthoevel/asdf-goreleaser.git \
+  && asdf install goreleaser "${GORELEASER_VERSION}" \
+  && asdf global goreleaser "${GORELEASER_VERSION}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 # Support tools installed as anvil when running as root user
 USER root
 ENV ASDF_DATA_DIR="/home/anvil/.asdf"
