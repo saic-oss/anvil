@@ -129,6 +129,7 @@ RUN wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/rel
 RUN useradd -ms /bin/bash anvil
 
 USER anvil
+WORKDIR /home/anvil
 
 # Install asdf. Get versions from https://github.com/asdf-vm/asdf/releases
 ARG ASDF_VERSION="0.7.8"
