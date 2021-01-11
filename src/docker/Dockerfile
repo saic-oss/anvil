@@ -132,7 +132,7 @@ USER anvil
 WORKDIR /home/anvil
 
 # Install asdf. Get versions from https://github.com/asdf-vm/asdf/releases
-ARG ASDF_VERSION="0.7.8"
+ARG ASDF_VERSION="0.8.0"
 ENV ASDF_VERSION=${ASDF_VERSION}
 # hadolint ignore=SC2016
 RUN git clone --branch "v${ASDF_VERSION}" --depth 1 https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" \
@@ -160,22 +160,25 @@ RUN asdf plugin add python \
   && asdf global python "${PYTHON_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Install pipx. Get versions using 'pip install pipx=='
-ARG PIPX_VERSION="0.15.6.0"
-ENV PIPX_VERSION=${PIPX_VERSION}
-RUN pip install --user "pipx=="
+# Install pipenv. Get versions using 'pip install pipenv=='
+# NOTE: PIPENV_VERSION is an env var that is used by pipenv, so it can't be used here. ref: https://github.com/pypa/pipenv/issues/3633#issuecomment-478250721
+ARG PIP_ENV_VERSION="2020.11.15"
+ENV PIP_ENV_VERSION=${PIP_ENV_VERSION}
+RUN pip install "pipenv==${PIP_ENV_VERSION}" \
+  && asdf reshim python \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install pre-commit. Get versions using 'pip install pre-commit=='
 ARG PRE_COMMIT_VERSION="2.7.1"
 ENV PRE_COMMIT_VERSION=${PRE_COMMIT_VERSION}
-RUN pip install --user "pre-commit==${PRE_COMMIT_VERSION}" \
+RUN pip install "pre-commit==${PRE_COMMIT_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install aws cli. Get versions using pip install awscli=='
 ARG AWS_CLI_VERSION="1.18.108"
 ENV AWS_CLI_VERSION=${AWS_CLI_VERSION}
-RUN pip install --user "awscli==${AWS_CLI_VERSION}" \
+RUN pip install "awscli==${AWS_CLI_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
