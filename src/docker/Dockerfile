@@ -160,17 +160,22 @@ RUN asdf plugin add python \
   && asdf global python "${PYTHON_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# Install pipx. Get versions using 'pip install pipx=='
+ARG PIPX_VERSION="0.15.6.0"
+ENV PIPX_VERSION=${PIPX_VERSION}
+RUN pip install --user "pipx=="
+
 # Install pre-commit. Get versions using 'pip install pre-commit=='
 ARG PRE_COMMIT_VERSION="2.7.1"
 ENV PRE_COMMIT_VERSION=${PRE_COMMIT_VERSION}
-RUN pip install "pre-commit==${PRE_COMMIT_VERSION}" \
+RUN pip install --user "pre-commit==${PRE_COMMIT_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install aws cli. Get versions using pip install awscli=='
 ARG AWS_CLI_VERSION="1.18.108"
 ENV AWS_CLI_VERSION=${AWS_CLI_VERSION}
-RUN pip install "awscli==${AWS_CLI_VERSION}" \
+RUN pip install --user "awscli==${AWS_CLI_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
