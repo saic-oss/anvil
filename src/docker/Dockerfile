@@ -292,6 +292,8 @@ RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git \
   && asdf install golang "${GO_VERSION}" \
   && asdf global golang "${GO_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+ENV GOPATH="/home/anvil/go"
+ENV PATH="${PATH}:${GOPATH}/bin"
 
 # Install golangci-lint. Get versions using asdf list all golangci-lint
 ARG GOLANGCI_LINT_VERSION="1.34.1"
@@ -307,6 +309,18 @@ ENV GORELEASER_VERSION=${GORELEASER_VERSION}
 RUN asdf plugin-add goreleaser https://github.com/kforsthoevel/asdf-goreleaser.git \
   && asdf install goreleaser "${GORELEASER_VERSION}" \
   && asdf global goreleaser "${GORELEASER_VERSION}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+# Install golint. "go get" doesn't really support specifying versions, so we just get the latest
+RUN go get -u golang.org/x/lint/golint \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+# Install gocyclo. "go get" doesn't really support specifying versions, so we just get the latest
+RUN go get -u github.com/fzipp/gocyclo/cmd/gocyclo \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+# Install gocritic. "go get" doesn't really support specifying versions, so we just get the latest
+RUN go get -u github.com/go-critic/go-critic/cmd/gocritic \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Support tools installed as anvil when running as root user
