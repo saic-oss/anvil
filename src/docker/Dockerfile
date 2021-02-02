@@ -230,7 +230,7 @@ RUN helm plugin install https://github.com/aslafy-z/helm-git.git --version "${HE
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helmfile. Get versions using 'asdf list all helmfile'.
-ARG HELMFILE_VERSION="0.125.0"
+ARG HELMFILE_VERSION="0.138.2"
 ENV HELMFILE_VERSION=${HELMFILE_VERSION}
 RUN asdf plugin add helmfile \
   && asdf install helmfile "${HELMFILE_VERSION}" \
