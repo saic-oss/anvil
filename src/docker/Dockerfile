@@ -27,6 +27,7 @@ ENV DOCKER_VERION=${DOCKER_VERSION}
 # base packages, so that we always get the latest version. These packages are very stable and
 # shouldn't ever need version pinning
 # Please keep the list alphabetized for maintainability
+
 RUN dnf install -y \
   bind-utils \
   bzip2 \
@@ -118,6 +119,16 @@ ENV GOMPLATE_VERSION=${GOMPLATE_VERSION}
 RUN wget -O /usr/local/bin/gomplate "https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim" \
   && chmod +x /usr/local/bin/gomplate \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+ # Install Podman. Get versions from https://github.com/hairyhenderson/gomplate/releases
+ARG PODMAN_VERSION="3.0.1-2"
+ENV PODMAN_VERSION=${PODMAN_VERSION}
+RUN dnf -y module disable container-tools
+RUN dnf -y install 'dnf-command(copr)'
+RUN curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:testing.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/testing/CentOS_8/devel:kubic:libcontainers:testing.repo
+RUN dnf -y --refresh install podman
+RUN dnf install -y iptables
+
 
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
 ARG DOCKER_COMPOSE_VERSION="1.26.2"
