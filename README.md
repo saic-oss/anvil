@@ -2,7 +2,7 @@
 
 https://hub.docker.com/repository/docker/saicoss/anvil
 
-Anvil is a DevSecOps tools container intended to drive all stages of a CI/CD pipeline. Anvil can also be used for local development, to ensure environment parity between development and build environments. Anvil is not intended to run applications in production.
+Anvil is a DevSecOps tools container intended to drive all stages of a CI/CD pipeline. Anvil can also be used for local development, to ensure environment parity between development and build environments. Anvil is not intended to run applications in production. 
 
 The idea is to:
 
