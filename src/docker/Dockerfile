@@ -36,7 +36,7 @@ RUN dnf install -y \
   bzip2 \
   bzip2-devel \
   container-selinux \
-  dnf-command(copr) \
+  "dnf-command(copr)" \
   gcc \
   gcc-c++ \
   gettext \
