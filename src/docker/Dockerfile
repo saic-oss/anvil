@@ -34,13 +34,12 @@ RUN dnf install -y wget
 # shouldn't ever need version pinning
 # Please keep the list alphabetized for maintainability
 RUN wget -O /etc/yum.repos.d/devel:kubic:libcontainers:testing.repo "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/testing/CentOS_8/devel:kubic:libcontainers:testing.repo" 
-RUN dnf -y module disable container-tools
 
-RUN dnf install -y \
+
+RUN dnf install -y --refresh \
   bind-utils \
   bzip2 \
   bzip2-devel \
-  container-selinux \
   "dnf-command(copr)" \
   gcc \
   gcc-c++ \
@@ -133,6 +132,7 @@ RUN wget -O /usr/local/bin/gomplate "https://github.com/hairyhenderson/gomplate/
 
 ## RUN wget -O /etc/yum.repos.d/devel:kubic:libcontainers:testing.repo "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/testing/CentOS_8/devel:kubic:libcontainers:testing.repo" \
 ##   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+RUN dnf -y module disable container-tools
 RUN dnf install -y --refresh ${PODMAN_VERSION}
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
 ARG DOCKER_COMPOSE_VERSION="1.26.2"
