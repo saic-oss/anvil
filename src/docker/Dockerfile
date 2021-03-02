@@ -23,6 +23,9 @@ ENV CONTAINERD_VERSION=${CONTAINERD_VERSION}
 ARG DOCKER_VERSION="3:19.03.13"
 ENV DOCKER_VERION=${DOCKER_VERSION}
 
+ARG PODMAN_VERSION="podman-3.0.1-2.el8.3.1"
+ENV PODMAN_VERSION=${PODMAN_VERSION}
+
 # Intentionally do not specify versions for the tools in the Development Tools group and other
 # base packages, so that we always get the latest version. These packages are very stable and
 # shouldn't ever need version pinning
@@ -33,15 +36,18 @@ RUN dnf install -y \
   bzip2 \
   bzip2-devel \
   container-selinux \
+  dnf-command(copr) \
   gcc \
   gcc-c++ \
   gettext \
   git \
   jq \
+  iptables \
   libffi-devel \
   libxslt-devel \
   make \
   ncurses-devel \
+  $PODMAN_VERSION \
   openssl-devel \
   readline-devel \
   sqlite-devel \
@@ -120,15 +126,11 @@ RUN wget -O /usr/local/bin/gomplate "https://github.com/hairyhenderson/gomplate/
   && chmod +x /usr/local/bin/gomplate \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
- # Install Podman. Get versions from https://github.com/hairyhenderson/gomplate/releases
-ARG PODMAN_VERSION="3.0.1-2"
-ENV PODMAN_VERSION=${PODMAN_VERSION}
-RUN dnf -y module disable container-tools
-RUN dnf -y install 'dnf-command(copr)'
-RUN curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:testing.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/testing/CentOS_8/devel:kubic:libcontainers:testing.repo
-RUN dnf -y --refresh install podman
-RUN dnf install -y iptables
+ # Install Podman. Get versions from https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/testing/CentOS_8/devel:kubic:libcontainers:testing.repo
 
+RUN dnf -y module disable container-tools
+RUN wget -O /etc/yum.repos.d/devel:kubic:libcontainers:testing.repo "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/testing/CentOS_8/devel:kubic:libcontainers:testing.repo" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
 ARG DOCKER_COMPOSE_VERSION="1.26.2"
