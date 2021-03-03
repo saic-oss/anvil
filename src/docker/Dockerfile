@@ -23,11 +23,6 @@ ENV CONTAINERD_VERSION=${CONTAINERD_VERSION}
 ARG DOCKER_VERSION="3:19.03.13"
 ENV DOCKER_VERION=${DOCKER_VERSION}
 
-##ARG PODMAN_VERSION="podman-3.0.1-2.el8.3.1"
-
-ARG PODMAN_VERSION="2.2.1"
-ENV PODMAN_VERSION=${PODMAN_VERSION}
-
 # Intentionally do not specify versions for the tools in the Development Tools group and other
 # base packages, so that we always get the latest version. These packages are very stable and
 # shouldn't ever need version pinning
@@ -46,7 +41,6 @@ RUN dnf install -y --refresh \
   libffi-devel \
   libxslt-devel \
   make \
-  podman-${PODMAN_VERSION} \
   ncurses-devel \
   openssl-devel \
   readline-devel \
@@ -132,6 +126,14 @@ ARG DOCKER_COMPOSE_VERSION="1.26.2"
 ENV DOCKER_COMPOSE_VERSION=${DOCKER_COMPOSE_VERSION}
 RUN wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64" \
   && chmod +x /usr/local/bin/docker-compose \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+# Install Podman. Get available versions by running the command `dnf list podman`
+ARG PODMAN_VERSION="2.2.1"
+ENV PODMAN_VERSION=${PODMAN_VERSION}
+RUN dnf -y install podman-${PODMAN_VERSION} \
+  && dnf clean all \
+  && rm -rf /var/cache/yum/ \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 RUN useradd -ms /bin/bash anvil
