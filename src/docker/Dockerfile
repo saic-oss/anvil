@@ -27,7 +27,8 @@ ENV DOCKER_VERION=${DOCKER_VERSION}
 # base packages, so that we always get the latest version. These packages are very stable and
 # shouldn't ever need version pinning
 # Please keep the list alphabetized for maintainability
-RUN dnf install -y \
+
+RUN dnf install -y --refresh \
   bind-utils \
   bzip2 \
   bzip2-devel \
@@ -37,6 +38,7 @@ RUN dnf install -y \
   gettext \
   git \
   jq \
+  iptables \
   libffi-devel \
   libxslt-devel \
   make \
@@ -124,6 +126,14 @@ ARG DOCKER_COMPOSE_VERSION="1.26.2"
 ENV DOCKER_COMPOSE_VERSION=${DOCKER_COMPOSE_VERSION}
 RUN wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64" \
   && chmod +x /usr/local/bin/docker-compose \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+# Install Podman. Get available versions by running the command `dnf list podman`
+ARG PODMAN_VERSION="2.2.1"
+ENV PODMAN_VERSION=${PODMAN_VERSION}
+RUN dnf -y install podman-${PODMAN_VERSION} \
+  && dnf clean all \
+  && rm -rf /var/cache/yum/ \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 RUN useradd -ms /bin/bash anvil
