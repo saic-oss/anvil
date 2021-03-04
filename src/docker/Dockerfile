@@ -203,8 +203,8 @@ RUN asdf plugin add kubectl \
   && asdf install kubectl "$(asdf list all kubectl 1.17 | tail -1)" \
   && asdf install kubectl "$(asdf list all kubectl 1.19 | tail -1)" \
   && asdf install kubectl "$(asdf list all kubectl 1.20 | tail -1)" \
-  && asdf install kubectl "${KUBECTL_VERSION}" \
-  && asdf global kubectl "${KUBECTL_VERSION}" \
+  && asdf install kubectl "$(asdf list all kubectl ${KUBECTL_VERSION} | tail -1)" \
+  && asdf global kubectl "$(asdf list all kubectl ${KUBECTL_VERSION} | tail -1)" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Helm. Get versions using 'asdf list all helm'.
