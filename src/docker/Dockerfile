@@ -197,13 +197,14 @@ RUN asdf plugin add java \
 # Multiple versions of kubectl are installed. You can choose which one to use by using 'asdf local kubectl X.Y.Z'.
 # It will create a file called '.tool-versions' that asdf will look for.
 # The env var KUBECTL_VERSION is used to set the global version of kubectl.
-ARG KUBECTL_VERSION="1.18.0"
+ARG KUBECTL_VERSION="1.18"
 ENV KUBECTL_VERSION=${KUBECTL_VERSION}
 RUN asdf plugin add kubectl \
-  && asdf install kubectl "$(asdf list all kubectl 1.16 | tail -1)" \
   && asdf install kubectl "$(asdf list all kubectl 1.17 | tail -1)" \
-  && asdf install kubectl "${KUBECTL_VERSION}" \
-  && asdf global kubectl "${KUBECTL_VERSION}" \
+  && asdf install kubectl "$(asdf list all kubectl 1.19 | tail -1)" \
+  && asdf install kubectl "$(asdf list all kubectl 1.20 | tail -1)" \
+  && asdf install kubectl "$(asdf list all kubectl ${KUBECTL_VERSION} | tail -1)" \
+  && asdf global kubectl "$(asdf list all kubectl ${KUBECTL_VERSION} | tail -1)" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Helm. Get versions using 'asdf list all helm'.

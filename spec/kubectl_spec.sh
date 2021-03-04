@@ -17,11 +17,12 @@ Describe "getInstalledVersions()"
     asdf list kubectl
   }
 
-  It "validates 1.16, 1.17, and 1.18 is installed"
+  It "validates 1.17, 1.18, 1.19, and 1.20 are installed"
     When call listInstalledVersions
-    The output should include "1.16."
     The output should include "1.17."
     The output should include "1.18."
+    The output should include "1.19."
+    The output should include "1.20."
     The status should eq 0
   End
 End
