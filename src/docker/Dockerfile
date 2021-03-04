@@ -121,7 +121,6 @@ RUN wget -O /usr/local/bin/gomplate "https://github.com/hairyhenderson/gomplate/
   && chmod +x /usr/local/bin/gomplate \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
 ARG DOCKER_COMPOSE_VERSION="1.26.2"
 ENV DOCKER_COMPOSE_VERSION=${DOCKER_COMPOSE_VERSION}
