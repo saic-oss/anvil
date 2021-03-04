@@ -197,7 +197,7 @@ RUN asdf plugin add java \
 # Multiple versions of kubectl are installed. You can choose which one to use by using 'asdf local kubectl X.Y.Z'.
 # It will create a file called '.tool-versions' that asdf will look for.
 # The env var KUBECTL_VERSION is used to set the global version of kubectl.
-ARG KUBECTL_VERSION="1.18.0"
+ARG KUBECTL_VERSION="1.18"
 ENV KUBECTL_VERSION=${KUBECTL_VERSION}
 RUN asdf plugin add kubectl \
   && asdf install kubectl "$(asdf list all kubectl 1.17 | tail -1)" \
