@@ -200,8 +200,9 @@ RUN asdf plugin add java \
 ARG KUBECTL_VERSION="1.18.0"
 ENV KUBECTL_VERSION=${KUBECTL_VERSION}
 RUN asdf plugin add kubectl \
-  && asdf install kubectl "$(asdf list all kubectl 1.16 | tail -1)" \
   && asdf install kubectl "$(asdf list all kubectl 1.17 | tail -1)" \
+  && asdf install kubectl "$(asdf list all kubectl 1.19 | tail -1)" \
+  && asdf install kubectl "$(asdf list all kubectl 1.20 | tail -1)" \
   && asdf install kubectl "${KUBECTL_VERSION}" \
   && asdf global kubectl "${KUBECTL_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
