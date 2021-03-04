@@ -247,7 +247,7 @@ RUN asdf plugin add terraform \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install terraform-docs. Get versions using 'asdf list all terraform-docs'
-ARG TERRAFORM_DOCS_VERSION="v0.9.1"
+ARG TERRAFORM_DOCS_VERSION="0.9.1"
 ENV TERRAFORM_DOCS_VERSION=${TERRAFORM_DOCS_VERSION}
 RUN asdf plugin add terraform-docs \
   && asdf install terraform-docs "${TERRAFORM_DOCS_VERSION}" \
