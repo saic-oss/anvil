@@ -32,6 +32,7 @@ RUN dnf install -y --refresh \
   bind-utils \
   bzip2 \
   bzip2-devel \
+  container-selinux \
   gcc \
   gcc-c++ \
   gettext \
