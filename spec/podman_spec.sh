@@ -8,6 +8,6 @@ Describe "printVersion()"
   It "validates tool is installed by checking version"
     When call printVersion
     The output should include "${PODMAN_VERSION}"
-    The status should eq 1
+    The status should eq 0
   End
 End
