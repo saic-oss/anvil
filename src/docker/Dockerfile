@@ -136,6 +136,14 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
   && rm -rf /var/cache/yum/ \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# Install Skopeo. Get available versions by running the command `dnf list skopeo`
+ARG SKOPEO_VERSION="1.2.0"
+ENV SKOPEO_VERSION=${SKOPEO_VERSION}
+RUN dnf -y install skopeo-${SKOPEO_VERSION} \
+  && dnf clean all \
+  && rm -rf /var/cache/yum/ \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 RUN useradd -ms /bin/bash anvil
 
 USER anvil
