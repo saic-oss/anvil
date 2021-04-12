@@ -342,6 +342,13 @@ RUN go get -u github.com/fzipp/gocyclo/cmd/gocyclo \
 RUN go get -u github.com/go-critic/go-critic/cmd/gocritic \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+ARG SONARSCANNER_VERSION="4.6.0.2311"
+ENV SONARSCANNER_VERSION=${SONARSCANNER_VERSION}
+RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonarscanner.git \
+  && asdf install sonarscanner "${SONARSCANNER_VERSION}" \
+  && asdf global sonarscanner "${SONARSCANNER_VERSION}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 # Support tools installed as anvil when running as root user
 USER root
 ENV ASDF_DATA_DIR="/home/anvil/.asdf"
