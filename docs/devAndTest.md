@@ -8,13 +8,13 @@ The following steps require [go-task](https://taskfile.dev/#/) and [docker](http
 
 ```bash
 # Build the image
-ANVIL_TAG=local task build
+TAG=local task build
 
 # Test the image (after building)
-ANVIL_TAG=local task test
+TAG=local task test
 
 # Put it all together
-ANVIL_TAG=local task build test
+TAG=local task build test
 ```
 
 ## Pre-commit
