@@ -257,7 +257,7 @@ RUN asdf plugin add helmfile \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Terraform. Get versions using 'asdf list all terraform'
-ARG TERRAFORM_VERSION="0.13.7"
+ARG TERRAFORM_VERSION="0.15.4"
 ENV TERRAFORM_VERSION=${TERRAFORM_VERSION}
 RUN asdf plugin add terraform \
   && asdf install terraform "${TERRAFORM_VERSION}" \
@@ -265,7 +265,7 @@ RUN asdf plugin add terraform \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install terraform-docs. Get versions using 'asdf list all terraform-docs'
-ARG TERRAFORM_DOCS_VERSION="0.9.1"
+ARG TERRAFORM_DOCS_VERSION="0.12.1"
 ENV TERRAFORM_DOCS_VERSION=${TERRAFORM_DOCS_VERSION}
 RUN asdf plugin add terraform-docs \
   && asdf install terraform-docs "${TERRAFORM_DOCS_VERSION}" \
@@ -273,7 +273,7 @@ RUN asdf plugin add terraform-docs \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install tflint. Get versions using 'asdf list all tflint'
-ARG TFLINT_VERSION="0.18.0"
+ARG TFLINT_VERSION="0.28.1"
 ENV TFLINT_VERSION=${TFLINT_VERSION}
 RUN asdf plugin add tflint \
   && asdf install tflint "${TFLINT_VERSION}" \
@@ -281,7 +281,7 @@ RUN asdf plugin add tflint \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install tfsec. Get versions using 'asdf list all tfsec'
-ARG TFSEC_VERSION="0.24.1"
+ARG TFSEC_VERSION="0.39.37"
 ENV TFSEC_VERSION=${TFSEC_VERSION}
 RUN asdf plugin add tfsec \
   && asdf install tfsec "${TFSEC_VERSION}" \
