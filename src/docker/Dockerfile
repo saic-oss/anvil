@@ -28,7 +28,6 @@ ENV DOCKER_VERION=${DOCKER_VERSION}
 # shouldn't ever need version pinning
 # Please keep the list alphabetized for maintainability
 
-
 RUN dnf install -y --refresh \
   bind-utils \
   bzip2 \
@@ -45,6 +44,7 @@ RUN dnf install -y --refresh \
   make \
   ncurses-devel \
   openssl-devel \
+  perl-Digest-SHA \
   readline-devel \
   sqlite-devel \
   unixODBC-devel \
