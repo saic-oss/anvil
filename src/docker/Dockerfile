@@ -10,6 +10,10 @@ WORKDIR /
 # Need root to do rooty things
 USER root
 
+# Bust the whole docker cache so ASDF doesn't try to use the old Terraform signing key that doesn't work anymore
+# This line should be removed after we get a clean tagged release
+RUN echo "hello world"
+
 # Install containerd.io. Get versions from https://download.docker.com/linux/centos/7/x86_64/stable/Packages/
 # This must be installed manually because Red Hat has blocked later versions of containerd.io
 # from being installed normally on RHEL/CentOS 8. Their intention is for people to use Podman/Buildah,
