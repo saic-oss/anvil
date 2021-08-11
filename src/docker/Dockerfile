@@ -351,6 +351,14 @@ RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonar
   && asdf global sonarscanner "${SONARSCANNER_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# Install serverless. Get versions using 'asdf list all serverless'.
+ARG SERVERLESS_VERSION="2.53.1"
+ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
+RUN asdf plugin add serverless https://github.com/serverless/serverless \
+  && asdf install serverless "${SERVERLESS_VERSION}}" \
+  && asdf global serverless "${SERVERLESS_VERSION}}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 # Support tools installed as anvil when running as root user
 USER root
 ENV ASDF_DATA_DIR="/home/anvil/.asdf"
