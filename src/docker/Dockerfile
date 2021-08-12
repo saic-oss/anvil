@@ -28,6 +28,7 @@ ENV DOCKER_VERION=${DOCKER_VERSION}
 # shouldn't ever need version pinning
 # Please keep the list alphabetized for maintainability
 
+# hadolint ignore=DL3041
 RUN dnf install -y --refresh \
   bind-utils \
   bzip2 \
@@ -76,7 +77,7 @@ RUN git clone --branch "${SHELLSPEC_VERSION}" --depth 1 https://github.com/shell
 # Install go-task. Get versions from https://github.com/go-task/task/releases
 ARG GO_TASK_VERSION="3.0.0"
 ENV GO_TASK_VERSION=${GO_TASK_VERSION}
-# hadolint ignore=DL3003
+# hadolint ignore=DL3003,DL3047
 RUN wget -O /root/task.tar.gz "https://github.com/go-task/task/releases/download/v${GO_TASK_VERSION}/task_linux_amd64.tar.gz" \
   && (cd /usr/local/bin && tar -xzvf /root/task.tar.gz task) \
   && rm -f /root/task.tar.gz \
@@ -85,7 +86,7 @@ RUN wget -O /root/task.tar.gz "https://github.com/go-task/task/releases/download
 # Install shellcheck. Get versions from https://github.com/koalaman/shellcheck/releases
 ARG SHELLCHECK_VERSION="0.7.1"
 ENV SHELLCHECK_VERSION=${SHELLCHECK_VERSION}
-# hadolint ignore=DL3003
+# hadolint ignore=DL3003,DL3047
 RUN wget -O /root/shellcheck.tar.xz "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
   && (cd /usr/local/bin && tar -xJvf /root/shellcheck.tar.xz --strip-components=1 "shellcheck-v${SHELLCHECK_VERSION}/shellcheck") \
   && rm -f /root/shellcheck.tar.xz \
@@ -94,6 +95,7 @@ RUN wget -O /root/shellcheck.tar.xz "https://github.com/koalaman/shellcheck/rele
 # Install hadolint. Get versions from https://github.com/hadolint/hadolint/releases
 ARG HADOLINT_VERSION="1.18.0"
 ENV HADOLINT_VERSION=${HADOLINT_VERSION}
+# hadolint ignore=DL3047
 RUN wget -O /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-Linux-x86_64" \
   && chmod +x /usr/local/bin/hadolint \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -101,6 +103,7 @@ RUN wget -O /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releas
 # Install klar. Get versions from https://github.com/optiopay/klar/releases
 ARG KLAR_VERSION="2.4.0"
 ENV KLAR_VERSION=${KLAR_VERSION}
+# hadolint ignore=DL3047
 RUN wget -O /usr/local/bin/klar "https://github.com/optiopay/klar/releases/download/v${KLAR_VERSION}/klar-${KLAR_VERSION}-linux-amd64" \
   && chmod +x /usr/local/bin/klar \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -108,7 +111,7 @@ RUN wget -O /usr/local/bin/klar "https://github.com/optiopay/klar/releases/downl
 # Install Fossa cli. Get versions from https://github.com/fossas/fossa-cli/releases
 ARG FOSSA_VERSION="1.0.30"
 ENV FOSSA_VERSION=${FOSSA_VERSION}
-# hadolint ignore=DL3003
+# hadolint ignore=DL3003,DL3047
 RUN wget -O /root/fossa.tar.gz "https://github.com/fossas/fossa-cli/releases/download/v${FOSSA_VERSION}/fossa-cli_${FOSSA_VERSION}_linux_amd64.tar.gz" \
   && (cd /usr/local/bin && tar -xzvf /root/fossa.tar.gz fossa) \
   && chmod +x /usr/local/bin/fossa \
@@ -118,6 +121,7 @@ RUN wget -O /root/fossa.tar.gz "https://github.com/fossas/fossa-cli/releases/dow
 # Install Gomplate. Get versions from https://github.com/hairyhenderson/gomplate/releases
 ARG GOMPLATE_VERSION="3.7.0"
 ENV GOMPLATE_VERSION=${GOMPLATE_VERSION}
+# hadolint ignore=DL3047
 RUN wget -O /usr/local/bin/gomplate "https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim" \
   && chmod +x /usr/local/bin/gomplate \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -125,6 +129,7 @@ RUN wget -O /usr/local/bin/gomplate "https://github.com/hairyhenderson/gomplate/
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
 ARG DOCKER_COMPOSE_VERSION="1.26.2"
 ENV DOCKER_COMPOSE_VERSION=${DOCKER_COMPOSE_VERSION}
+# hadolint ignore=DL3047
 RUN wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64" \
   && chmod +x /usr/local/bin/docker-compose \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -145,6 +150,7 @@ RUN dnf -y install skopeo-${SKOPEO_VERSION} \
   && rm -rf /var/cache/yum/ \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# hadolint ignore=DL3059
 RUN useradd -ms /bin/bash anvil
 
 USER anvil
@@ -183,6 +189,7 @@ RUN asdf plugin add python \
 # NOTE: PIPENV_VERSION is an env var that is used by pipenv, so it can't be used here. ref: https://github.com/pypa/pipenv/issues/3633#issuecomment-478250721
 ARG PIP_ENV_VERSION="2020.11.15"
 ENV PIP_ENV_VERSION=${PIP_ENV_VERSION}
+# hadolint ignore=DL3042
 RUN pip install "pipenv==${PIP_ENV_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -190,6 +197,7 @@ RUN pip install "pipenv==${PIP_ENV_VERSION}" \
 # Install pre-commit. Get versions using 'pip install pre-commit=='
 ARG PRE_COMMIT_VERSION="2.7.1"
 ENV PRE_COMMIT_VERSION=${PRE_COMMIT_VERSION}
+# hadolint ignore=DL3042
 RUN pip install "pre-commit==${PRE_COMMIT_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -197,6 +205,7 @@ RUN pip install "pre-commit==${PRE_COMMIT_VERSION}" \
 # Install aws cli. Get versions using pip install awscli=='
 ARG AWS_CLI_VERSION="1.18.108"
 ENV AWS_CLI_VERSION=${AWS_CLI_VERSION}
+# hadolint ignore=DL3042
 RUN pip install "awscli==${AWS_CLI_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -354,7 +363,7 @@ RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonar
 # Install serverless. Get versions from https://github.com/serverless/serverless/releases
 ARG SERVERLESS_VERSION="2.54.0"
 ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
-RUN npm install -g serverless --${SERVERLESS_VERSION} \
+RUN npm install -g serverless@${SERVERLESS_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Support tools installed as anvil when running as root user
