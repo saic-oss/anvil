@@ -130,7 +130,7 @@ RUN wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/rel
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Podman. Get available versions by running the command `dnf list podman`
-ARG PODMAN_VERSION="2.2.1"
+ARG PODMAN_VERSION="3.0.1"
 ENV PODMAN_VERSION=${PODMAN_VERSION}
 RUN dnf -y install podman-${PODMAN_VERSION} \
   && dnf clean all \
@@ -138,7 +138,7 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Skopeo. Get available versions by running the command `dnf list skopeo`
-ARG SKOPEO_VERSION="1.2.0"
+ARG SKOPEO_VERSION="1.2.2"
 ENV SKOPEO_VERSION=${SKOPEO_VERSION}
 RUN dnf -y install skopeo-${SKOPEO_VERSION} \
   && dnf clean all \
@@ -306,7 +306,7 @@ RUN asdf plugin add helm-cr \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install golang. Get versions using 'asdf list all golang'
-ARG GO_VERSION="1.15.6"
+ARG GO_VERSION="1.16.7"
 ENV GO_VERSION=${GO_VERSION}
 RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git \
   && asdf install golang "${GO_VERSION}" \
@@ -351,12 +351,10 @@ RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonar
   && asdf global sonarscanner "${SONARSCANNER_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Install serverless. Get versions using 'asdf list all serverless'.
-ARG SERVERLESS_VERSION="2.53.1"
+# Install serverless. Get versions from https://github.com/serverless/serverless/releases
+ARG SERVERLESS_VERSION="2.54.0"
 ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
-RUN asdf plugin add serverless https://github.com/serverless/serverless \
-  && asdf install serverless "${SERVERLESS_VERSION}}" \
-  && asdf global serverless "${SERVERLESS_VERSION}}" \
+RUN npm install -g serverless --{SERVERLESS_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Support tools installed as anvil when running as root user
