@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    skopeo -v | grep "${SKOPEO_VERSION}"
+    skopeo version | grep "${SKOPEO_VERSION}"
   }
 
   It "validates tool is installed by checking version"
