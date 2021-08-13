@@ -349,7 +349,7 @@ RUN go get -u github.com/fzipp/gocyclo/cmd/gocyclo \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install gocritic. "go get" doesn't really support specifying versions, so we just get the latest
-RUN go get -u https://github.com/go-critic/go-critic/tree/master/cmd/gocritic \
+RUN go get -u github.com/go-critic/go-critic/cmd/gocritic \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install sonarscanner. Get versions using 'asdf list all sonarscanner'
