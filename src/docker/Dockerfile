@@ -135,7 +135,7 @@ RUN wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/rel
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Podman. Get available versions by running the command `dnf list podman`
-ARG PODMAN_VERSION="3.0.1"
+ARG PODMAN_VERSION="3.2.3"
 ENV PODMAN_VERSION=${PODMAN_VERSION}
 RUN dnf -y install podman-${PODMAN_VERSION} \
   && dnf clean all \
@@ -143,7 +143,7 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Skopeo. Get available versions by running the command `dnf list skopeo`
-ARG SKOPEO_VERSION="1.2.2"
+ARG SKOPEO_VERSION="1.3.1"
 ENV SKOPEO_VERSION=${SKOPEO_VERSION}
 RUN dnf -y install skopeo-${SKOPEO_VERSION} \
   && dnf clean all \
@@ -365,6 +365,7 @@ ARG SERVERLESS_VERSION="2.54.0"
 ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
 RUN npm install -g serverless@${SERVERLESS_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 
 # Support tools installed as anvil when running as root user
 USER root
