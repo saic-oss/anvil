@@ -145,6 +145,12 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
 # Install Skopeo. Get available versions by running the command `dnf list skopeo`
 ARG SKOPEO_VERSION="1.3.1"
 ENV SKOPEO_VERSION=${SKOPEO_VERSION}
+
+# A seperate binary version needs to be set because, for some unknown reason, skopeo's package verion and binary version are different.
+# This is caused by Red Hat's packaging and there isn't much we can do about it.
+ARG SKOPEO_BINARY_VERSION="1.3.2"
+ENV SKOPEO_BINARY_VERSION=${SKOPEO_BINARY_VERSION}
+
 RUN dnf -y install skopeo-${SKOPEO_VERSION} \
   && dnf clean all \
   && rm -rf /var/cache/yum/ \
