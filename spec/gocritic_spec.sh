@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    cd $(find $HOME -name checkers.go); gocritic version
+    cd $(find "$HOME" -name checkers -type d | head -n1); gocritic version
   }
 
   It "validates tool is installed by checking version"
