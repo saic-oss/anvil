@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    cd ~/go/pkg/mod/github.com/go-critic/go-critic\@v0.5.7/;gocritic version
+    cd /home/anvil/go/pkg/mod/github.com/go-critic/go-critic\@v0.5.7/;gocritic version
   }
 
   It "validates tool is installed by checking version"
