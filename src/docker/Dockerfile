@@ -28,6 +28,7 @@ ENV DOCKER_VERION=${DOCKER_VERSION}
 # shouldn't ever need version pinning
 # Please keep the list alphabetized for maintainability
 
+# hadolint ignore=DL3041
 RUN dnf install -y --refresh \
   bind-utils \
   bzip2 \
@@ -77,7 +78,7 @@ RUN git clone --branch "${SHELLSPEC_VERSION}" --depth 1 https://github.com/shell
 ARG GO_TASK_VERSION="3.0.0"
 ENV GO_TASK_VERSION=${GO_TASK_VERSION}
 # hadolint ignore=DL3003
-RUN wget -O /root/task.tar.gz "https://github.com/go-task/task/releases/download/v${GO_TASK_VERSION}/task_linux_amd64.tar.gz" \
+RUN wget -O /root/task.tar.gz --progress=dot:giga "https://github.com/go-task/task/releases/download/v${GO_TASK_VERSION}/task_linux_amd64.tar.gz" \
   && (cd /usr/local/bin && tar -xzvf /root/task.tar.gz task) \
   && rm -f /root/task.tar.gz \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -86,7 +87,7 @@ RUN wget -O /root/task.tar.gz "https://github.com/go-task/task/releases/download
 ARG SHELLCHECK_VERSION="0.7.1"
 ENV SHELLCHECK_VERSION=${SHELLCHECK_VERSION}
 # hadolint ignore=DL3003
-RUN wget -O /root/shellcheck.tar.xz "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
+RUN wget -O /root/shellcheck.tar.xz --progress=dot:giga "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
   && (cd /usr/local/bin && tar -xJvf /root/shellcheck.tar.xz --strip-components=1 "shellcheck-v${SHELLCHECK_VERSION}/shellcheck") \
   && rm -f /root/shellcheck.tar.xz \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
@@ -94,14 +95,14 @@ RUN wget -O /root/shellcheck.tar.xz "https://github.com/koalaman/shellcheck/rele
 # Install hadolint. Get versions from https://github.com/hadolint/hadolint/releases
 ARG HADOLINT_VERSION="1.18.0"
 ENV HADOLINT_VERSION=${HADOLINT_VERSION}
-RUN wget -O /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-Linux-x86_64" \
+RUN wget -O /usr/local/bin/hadolint --progress=dot:giga "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-Linux-x86_64" \
   && chmod +x /usr/local/bin/hadolint \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install klar. Get versions from https://github.com/optiopay/klar/releases
 ARG KLAR_VERSION="2.4.0"
 ENV KLAR_VERSION=${KLAR_VERSION}
-RUN wget -O /usr/local/bin/klar "https://github.com/optiopay/klar/releases/download/v${KLAR_VERSION}/klar-${KLAR_VERSION}-linux-amd64" \
+RUN wget -O /usr/local/bin/klar --progress=dot:giga "https://github.com/optiopay/klar/releases/download/v${KLAR_VERSION}/klar-${KLAR_VERSION}-linux-amd64" \
   && chmod +x /usr/local/bin/klar \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
@@ -109,7 +110,7 @@ RUN wget -O /usr/local/bin/klar "https://github.com/optiopay/klar/releases/downl
 ARG FOSSA_VERSION="1.0.30"
 ENV FOSSA_VERSION=${FOSSA_VERSION}
 # hadolint ignore=DL3003
-RUN wget -O /root/fossa.tar.gz "https://github.com/fossas/fossa-cli/releases/download/v${FOSSA_VERSION}/fossa-cli_${FOSSA_VERSION}_linux_amd64.tar.gz" \
+RUN wget -O /root/fossa.tar.gz --progress=dot:giga "https://github.com/fossas/fossa-cli/releases/download/v${FOSSA_VERSION}/fossa-cli_${FOSSA_VERSION}_linux_amd64.tar.gz" \
   && (cd /usr/local/bin && tar -xzvf /root/fossa.tar.gz fossa) \
   && chmod +x /usr/local/bin/fossa \
   && rm -f /root/fossa.tar.gz \
@@ -118,19 +119,19 @@ RUN wget -O /root/fossa.tar.gz "https://github.com/fossas/fossa-cli/releases/dow
 # Install Gomplate. Get versions from https://github.com/hairyhenderson/gomplate/releases
 ARG GOMPLATE_VERSION="3.7.0"
 ENV GOMPLATE_VERSION=${GOMPLATE_VERSION}
-RUN wget -O /usr/local/bin/gomplate "https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim" \
+RUN wget -O /usr/local/bin/gomplate --progress=dot:giga "https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim" \
   && chmod +x /usr/local/bin/gomplate \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
 ARG DOCKER_COMPOSE_VERSION="1.26.2"
 ENV DOCKER_COMPOSE_VERSION=${DOCKER_COMPOSE_VERSION}
-RUN wget -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64" \
+RUN wget -O /usr/local/bin/docker-compose --progress=dot:giga "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64" \
   && chmod +x /usr/local/bin/docker-compose \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Podman. Get available versions by running the command `dnf list podman`
-ARG PODMAN_VERSION="2.2.1"
+ARG PODMAN_VERSION="3.2.3"
 ENV PODMAN_VERSION=${PODMAN_VERSION}
 RUN dnf -y install podman-${PODMAN_VERSION} \
   && dnf clean all \
@@ -138,13 +139,20 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Skopeo. Get available versions by running the command `dnf list skopeo`
-ARG SKOPEO_VERSION="1.2.0"
+ARG SKOPEO_VERSION="1.3.1"
 ENV SKOPEO_VERSION=${SKOPEO_VERSION}
+
+# A seperate binary version needs to be set because, for some unknown reason, skopeo's package verion and binary version are different.
+# This is caused by Red Hat's packaging and there isn't much we can do about it.
+ARG SKOPEO_BINARY_VERSION="1.3.2"
+ENV SKOPEO_BINARY_VERSION=${SKOPEO_BINARY_VERSION}
+
 RUN dnf -y install skopeo-${SKOPEO_VERSION} \
   && dnf clean all \
   && rm -rf /var/cache/yum/ \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# hadolint ignore=DL3059
 RUN useradd -ms /bin/bash anvil
 
 USER anvil
@@ -183,21 +191,21 @@ RUN asdf plugin add python \
 # NOTE: PIPENV_VERSION is an env var that is used by pipenv, so it can't be used here. ref: https://github.com/pypa/pipenv/issues/3633#issuecomment-478250721
 ARG PIP_ENV_VERSION="2020.11.15"
 ENV PIP_ENV_VERSION=${PIP_ENV_VERSION}
-RUN pip install "pipenv==${PIP_ENV_VERSION}" \
+RUN pip install --no-cache-dir "pipenv==${PIP_ENV_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install pre-commit. Get versions using 'pip install pre-commit=='
 ARG PRE_COMMIT_VERSION="2.7.1"
 ENV PRE_COMMIT_VERSION=${PRE_COMMIT_VERSION}
-RUN pip install "pre-commit==${PRE_COMMIT_VERSION}" \
+RUN pip install --no-cache-dir "pre-commit==${PRE_COMMIT_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install aws cli. Get versions using pip install awscli=='
 ARG AWS_CLI_VERSION="1.18.108"
 ENV AWS_CLI_VERSION=${AWS_CLI_VERSION}
-RUN pip install "awscli==${AWS_CLI_VERSION}" \
+RUN pip install --no-cache-dir "awscli==${AWS_CLI_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
@@ -306,7 +314,7 @@ RUN asdf plugin add helm-cr \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install golang. Get versions using 'asdf list all golang'
-ARG GO_VERSION="1.15.6"
+ARG GO_VERSION="1.16.7"
 ENV GO_VERSION=${GO_VERSION}
 RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git \
   && asdf install golang "${GO_VERSION}" \
@@ -316,7 +324,7 @@ ENV GOPATH="/home/anvil/go"
 ENV PATH="${PATH}:${GOPATH}/bin"
 
 # Install golangci-lint. Get versions using asdf list all golangci-lint
-ARG GOLANGCI_LINT_VERSION="1.34.1"
+ARG GOLANGCI_LINT_VERSION="1.41.1"
 ENV GOLANGCI_LINT_VERSION=${GOLANGCI_LINT_VERSION}
 RUN asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lint.git \
   && asdf install golangci-lint "${GOLANGCI_LINT_VERSION}" \
@@ -350,6 +358,13 @@ RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonar
   && asdf install sonarscanner "${SONARSCANNER_VERSION}" \
   && asdf global sonarscanner "${SONARSCANNER_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
+# Install serverless. Get versions from https://github.com/serverless/serverless/releases
+ARG SERVERLESS_VERSION="2.54.0"
+ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
+RUN npm install -g serverless@${SERVERLESS_VERSION} \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
+
 
 # Support tools installed as anvil when running as root user
 USER root

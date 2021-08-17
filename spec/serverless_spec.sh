@@ -2,12 +2,12 @@
 
 Describe "printVersion()"
   printVersion() {
-    cd $(find / -name "go-critic@*" -type d 2> /dev/null | head -n1); cd checkers; gocritic version
+    serverless --version | grep "${SERVERLESS_VERSION}"
   }
 
   It "validates tool is installed by checking version"
     When call printVersion
-    The stderr should be present
+    The output should include "${SERVERLESS_VERSION}"
     The status should eq 0
   End
 End

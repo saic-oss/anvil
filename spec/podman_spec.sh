@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    podman --version | grep "${PODMAN_VERSION}"
+    podman -v | grep "${PODMAN_VERSION}"
   }
 
   It "validates tool is installed by checking version"
