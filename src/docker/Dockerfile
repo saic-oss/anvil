@@ -236,7 +236,7 @@ RUN asdf plugin add kubectl \
 
 # Install Helm. Get versions using 'asdf list all helm'.
 # Note: Please don't use Helm 2. Friends don't let friends use Tiller.
-ARG HELM_VERSION="3.2.4"
+ARG HELM_VERSION="3.6.3"
 ENV HELM_VERSION=${HELM_VERSION}
 RUN asdf plugin add helm \
   && asdf install helm "${HELM_VERSION}" \
