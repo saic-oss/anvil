@@ -6,7 +6,7 @@ indicators:
 stages:
   - "clone"
   - "validate"
-  # - "test"
+  - "test"
   - "secure"
   - "deliver"
 
