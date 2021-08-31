@@ -42,14 +42,14 @@ steps:
     dockerfile: "Dockerfile"
     registry: "dockerhub"
 
-  # test:
-  #   title: "Running automated tests"
-  #   type: "freestyle"
-  #   image: "${{build_tmp_image}}"
-  #   working_directory: "${{clone}}"
-  #   stage: "test"
-  #   commands:
-  #     - task codefresh:test
+  test:
+    title: "Running automated tests"
+    type: "freestyle"
+    image: "${{build_tmp_image}}"
+    working_directory: "${{clone}}"
+    stage: "test"
+    commands:
+      - task codefresh:test
 
   secure:
     title: "Running automated security checks"

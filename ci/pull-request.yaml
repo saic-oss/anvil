@@ -6,7 +6,7 @@ indicators:
 stages:
   - "clone"
   - "validate"
-  {{/* - "test" */}}
+  - "test"
   - "secure"
 
 steps:
@@ -40,14 +40,14 @@ steps:
     dockerfile: "Dockerfile"
     registry: "dockerhub"
 
-  {{/* test:
+  test:
     title: "Running automated tests"
     type: "freestyle"
     image: "${{build_tmp_image}}"
     working_directory: "${{clone}}"
     stage: "test"
     commands:
-      - task codefresh:test */}}
+      - task codefresh:test
 
   secure:
     title: "Running automated security checks"
