@@ -266,7 +266,7 @@ RUN asdf plugin add helmfile \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Terraform. Get versions using 'asdf list all terraform'
-ARG TERRAFORM_VERSION="0.15.4"
+ARG TERRAFORM_VERSION="1.0.4"
 ENV TERRAFORM_VERSION=${TERRAFORM_VERSION}
 RUN asdf plugin add terraform \
   && asdf install terraform "${TERRAFORM_VERSION}" \
