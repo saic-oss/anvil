@@ -48,10 +48,10 @@ Tools installed in Anvil are tested using [shellspec](https://github.com/shellsp
 
 ## Customizing Anvil
 
-To build a custom version of Anvil that overrides versions of specific tools, use the `--build-arg` flag. For example, to build Anvil with v0.21.0 of shellspec:
+To build a custom version of Anvil that overrides versions of specific tools, use the `--build-arg` flag. For example, to build Anvil with v0.28.0 of shellspec:
 
 ```bash
-docker build src/docker -t custom-anvil:local --build-arg SHELLSPEC_VERSION=0.21.0
+docker build src/docker -t custom-anvil:local --build-arg SHELLSPEC_VERSION=0.28.0
 ```
 
 ## Forking Anvil
