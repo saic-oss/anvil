@@ -258,7 +258,7 @@ RUN helm plugin install https://github.com/aslafy-z/helm-git.git --version "${HE
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-s3 plugin. Get versions from https://github.com/hypnoglow/helm-s3/releases
-ARG HELM_S3_VERSION=0.10.0"
+ARG HELM_S3_VERSION="0.10.0"
 ENV HELM_S3_VERSION=${HELM_S3_VERSION}
 RUN helm plugin install https://github.com/hypnoglow/helm-s3.git --version "${HELM_S3_VERSION}" \
   && asdf reshim helm \
