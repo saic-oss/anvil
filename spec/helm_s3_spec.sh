@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    helm plugin list | grep "helm-s3" | grep "${HELM_S3_VERSION}"
+    helm plugin list | grep "s3" | grep "${HELM_S3_VERSION}"
   }
 
   It "validates tool is installed by checking version"
