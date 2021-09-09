@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    serverless --version | grep "${SERVERLESS_VERSION}"
+    serverless --version | grep --color=never "${SERVERLESS_VERSION}"
   }
 
   It "validates tool is installed by checking version"
