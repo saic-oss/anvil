@@ -7,11 +7,12 @@ jobs:
     runs-on: macos-latest
     name: Validating project
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: asdf_install
         uses: asdf-vm/actions/install@v1
-      - uses: actions/checkout@v2
       - name: Validating
+        uses: actions/checkout@v2
         run: task validate
 
   build:
