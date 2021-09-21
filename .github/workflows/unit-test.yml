@@ -8,8 +8,6 @@ jobs:
     name: Validating project
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: asdf install
       - name: Validating
         run: task validate
 
