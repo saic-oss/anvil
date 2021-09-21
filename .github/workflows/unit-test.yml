@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   validate:
+    runs-on: macos-latest
     name: Validating project
     steps:
       - uses: actions/checkout@v2
@@ -11,6 +12,7 @@ jobs:
         run: task validate
 
   build:
+    runs-on: macos-latest
     needs: validate
     name: Build Docker image
     steps:
