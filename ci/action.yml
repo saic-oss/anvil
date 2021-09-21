@@ -1,0 +1,5 @@
+name: "Unit Test"
+descriptions: "Runs automated unit tests within the Docker container"
+runs:
+  using: "docker"
+  image: "Dockerfile"
