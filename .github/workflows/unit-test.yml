@@ -9,10 +9,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: asdf_install
+      - name: Install asdf
         uses: asdf-vm/actions/install@v1
-      - name: Install Taskfile
-        uses: Arduino/actions/setup-taskfile@master
+      - name: Install Task
+        uses: arduino/setup-task@v1
       - name: Validating
         run: task validate
 
