@@ -20,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build the Docker image
-        uses: ./ci/
+        uses: ./.github/actions/unit-test-action.yml
 
   test:
     runs-on: ubuntu-latest
