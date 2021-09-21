@@ -3,12 +3,24 @@ name: unit-test
 on: [push, pull_request]
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validating project
+    steps:
+      - name: Install dependencies
+        run: asdf install
+      - name: Validating
+        run: task validate
+
   build:
     runs-on: ubuntu-latest
     name: Build Docker image
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          repository: saic-oss/anvil
+          path: anvil
       - name: Build the Docker image
         uses: ./.github/actions/unit-test-action.yml
 
