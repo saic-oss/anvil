@@ -11,25 +11,22 @@ jobs:
         uses: actions/checkout@v2
       - name: Install asdf
         uses: asdf-vm/actions/install@v1
-      - name: Install Task
-        uses: arduino/setup-task@v1
-      - name: Install pre-commit
-        uses: pre-commit/action@v2.0.3
-      - name: Validating
-        run: task validate
+      # - name: Install Task
+      #   uses: arduino/setup-task@v1
+      # - name: Install pre-commit
+      #   uses: pre-commit/action@v2.0.3
+      # - name: Validating
+      #   run: task validate
 
-  # build:
-  #   runs-on: macos-latest
-  #   needs: validate
-  #   name: Build Docker image
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: saic-oss/anvil
-  #         path: anvil
-  #     - name: Build the Docker image
-  #       uses: ./.github/actions/unit-test-action.yml
+  build:
+    runs-on: macos-latest
+    needs: validate
+    name: Build Docker image
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build the Docker image
+        uses: ./.github/actions/unit-test-action.yml
 
   # test:
   #   runs-on: ubuntu-latest
