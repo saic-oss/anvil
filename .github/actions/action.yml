@@ -1,5 +1,5 @@
-name: "Unit Test"
-descriptions: "Runs automated unit tests within the Docker container"
+name: "Build Docker Image"
+descriptions: "Builds the Docker image using the Dockerfile"
 runs:
   using: "docker"
   image: "../../src/docker/Dockerfile"
