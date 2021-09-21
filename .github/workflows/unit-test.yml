@@ -3,15 +3,6 @@ name: Unit Test
 on: push, pull_request
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    name: Validating project
-    steps:
-      - name: Install dependencies
-        run: asdf install
-      - name: Validate
-        run: task validate
-
   build:
     runs-on: ubuntu-latest
     name: Build Docker image
