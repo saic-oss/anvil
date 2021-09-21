@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Validating project
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: saic-oss/anvil
+          path: anvil
       - name: Install dependencies
         run: asdf install
       - name: Validating
