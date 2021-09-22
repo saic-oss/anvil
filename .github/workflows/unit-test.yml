@@ -1,6 +1,6 @@
 name: unit-test
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   validate:
@@ -15,8 +15,8 @@ jobs:
         uses: arduino/setup-task@v1
       # - name: Install pre-commit
       #   uses: pre-commit/action@v2.0.3
-      # - name: Validating
-      #   run: task validate
+      - name: Validating
+        run: task validate
 
   build:
     runs-on: ubuntu-latest
@@ -42,16 +42,16 @@ jobs:
       - name: Run unit tests
         run: task test TAG=latest
 
-  secure:
-    runs-on: ubuntu-latest
-    needs: test
-    name: Running automated security checks
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install asdf
-        uses: asdf-vm/actions/install@v1
-      - name: Install Task
-        uses: arduino/setup-task@v1
-      - name: Security checks
-        run: task secure
+  # secure:
+  #   runs-on: ubuntu-latest
+  #   needs: test
+  #   name: Running automated security checks
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Install asdf
+  #       uses: asdf-vm/actions/install@v1
+  #     - name: Install Task
+  #       uses: arduino/setup-task@v1
+  #     - name: Security checks
+  #       run: task secure
