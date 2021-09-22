@@ -13,11 +13,11 @@ jobs:
         uses: asdf-vm/actions/install@v1
       - name: Install Task
         uses: arduino/setup-task@v1
-      - name: Install hadolint
+      - name: Run hadolint
         uses: hadolint/hadolint-action@v1.5.0
         with:
           dockerfile: ./src/docker/Dockerfile
-      - name: Install pre-commit
+      - name: Run pre-commit
         uses: pre-commit/action@v2.0.3
       - name: Validating
         run: task validate
