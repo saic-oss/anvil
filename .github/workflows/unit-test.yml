@@ -15,6 +15,8 @@ jobs:
         uses: arduino/setup-task@v1
       - name: Install pre-commit
         uses: pre-commit/action@v2.0.3
+      - name: Install hadolint
+        uses: hadolint/hadolint-action@v1.5.0
       - name: Validating
         run: task validate
 
