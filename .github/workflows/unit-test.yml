@@ -16,7 +16,7 @@ jobs:
       - name: Install hadolint
         uses: hadolint/hadolint-action@v1.5.0
         with:
-          dockerfile: "../../src/docker/Dockerfile"
+          dockerfile: Dockerfile
       - name: Install pre-commit
         uses: pre-commit/action@v2.0.3
       - name: Validating
