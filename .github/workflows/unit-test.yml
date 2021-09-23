@@ -23,8 +23,8 @@ jobs:
     needs: validate
     name: Build Docker Image
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Docker Layer Caching
         uses: satackey/action-docker-layer-caching@v0.0.11
       - name: Build the Docker Image
@@ -35,8 +35,8 @@ jobs:
     needs: build
     name: Run Unit Tests
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Setup Task
         uses: arduino/setup-task@v1
       - name: Run Unit Tests
