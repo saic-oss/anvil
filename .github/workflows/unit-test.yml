@@ -5,7 +5,7 @@ on: [pull_request]
 jobs:
   validate:
     runs-on: ubuntu-latest
-    name: Validating project
+    name: Validate
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
     needs: build
     name: Run Unit Tests
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
       - name: Setup Task
         uses: arduino/setup-task@v1
