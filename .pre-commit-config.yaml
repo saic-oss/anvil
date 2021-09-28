@@ -28,7 +28,3 @@ repos:
     rev: v2.3.2
     hooks:
       - id: prettier
-  # - repo: https://github.com/jas-on/pre-commit-hadolint
-  #   rev: 1.0.1
-  #   hooks:
-  #     - id: hadolint
