@@ -1,0 +1,37 @@
+#!/usr/bin/env shellspec
+
+# Check DNF for an update to the given package
+# Inputs: package to check for an update, e.g. "container.io"
+# Return: 0 if an update is availabe; non-0 if no update is available
+checkForDnfUpdate() {
+  dnf list updates 2>&1 | grep "^$*" > /dev/null
+}
+
+# Get the latest release from a GitHub project
+# Inputs: owner and repo of the GitHub project to check, e.g. "docker/compose"
+# Output: String containing the latest release version, e.g. "0.1.2"
+getLatestGitHubRelease() {
+    curl -H "Accept: application/vnd.github.v3+json" \
+      "https://api.github.com/repos/"$*"/releases" 2> /dev/null | \
+      jq '.[0].name' 2> /dev/null
+}
+
+# Get the latest tag from a GitHub project
+# Inputs: owner and repo of the GitHub project to check, e.g. "docker/compose"
+# Output: String containing the latest tag version, e.g. "0.1.2"
+getLatestGitHubTag() {
+    curl -H "Accept: application/vnd.github.v3+json" \
+      "https://api.github.com/repos/"$*"/tags" 2> /dev/null | \
+      jq '.[0].name' 2> /dev/null
+}
+
+# Check pip for an update to the given package
+# Inputs: package to check for an update, e.g. "awscli"
+# Return: 0 if an update is availabe; non-0 if no update is available
+checkForPipUpdate() {
+  pip list --outdated 2> /dev/null | grep "^$*" > /dev/null
+}
+
+getLatestVersionFromAsdf() {
+  asdf latest $* 2> /dev/null
+}
