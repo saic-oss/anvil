@@ -30,7 +30,7 @@ jobs:
       - name: Setup Task
         uses: arduino/setup-task@v1
       - name: Build the Docker Image
-        run: task build TAG=latest
+        run: task build TAG=local
 
   test:
     runs-on: ubuntu-latest
@@ -42,4 +42,4 @@ jobs:
       - name: Setup Task
         uses: arduino/setup-task@v1
       - name: Run Unit Tests
-        run: task test TAG=latest
+        run: task test TAG=local
