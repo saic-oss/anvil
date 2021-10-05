@@ -7,6 +7,13 @@ checkForDnfUpdate() {
   dnf list updates 2>&1 | grep "^$*" > /dev/null
 }
 
+# Gets latest release from DNF
+# Inputs: package to check for an update, e.g. "skopeo.x86_64"
+# Return: String containing the latest release version, e.g. "0.1.2"
+getLatestVersionFromDnf() {
+  dnf list updates 2> /dev/null | grep "$*" 2> /dev/null | awk '{print $2}' 2> /dev/null
+}
+
 # Get the latest release from a GitHub project
 # Inputs: owner and repo of the GitHub project to check, e.g. "docker/compose"
 # Output: String containing the latest release version, e.g. "0.1.2"
@@ -32,6 +39,31 @@ checkForPipUpdate() {
   pip list --outdated 2> /dev/null | grep "^$*" > /dev/null
 }
 
+# Get latest version of an update from Pip
+# Inputs: package to check for an update, e.g. "pipenv"
+# Return: String containing the latest version, e.g. "0.1.2"
+getLatestVersionFromPip() {
+  pip list --outdated 2> /dev/null | grep "$*" 2> /dev/null | awk '{print $3}' 2> /dev/null
+}
+
+# Get the latest version from asdf
+# Input: name of the package, e.g. "terraform"
+# Return: String containing the latest version, e.g. "0.1.2"
 getLatestVersionFromAsdf() {
   asdf latest $* 2> /dev/null
+}
+
+# Get the latest version from asdf list
+# Some packages are not supported with asdf latest
+# Input: name of the package, e.g. "java"
+# Return: String containing the latest version, e.g. "0.1.2"
+getLatestVersionFromAsdfList() {
+  asdf list $* 2> /dev/null
+}
+
+# Get the latest version from npm
+# Inputs: name of the package, e.g. "serverless"
+# Return: String containing the latest version, e.g. "0.1.2"
+getLatestVersionFromNpm() {
+  npm show $* version 2> /dev/null
 }
