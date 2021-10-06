@@ -18,7 +18,7 @@ jobs:
       - name: Run pre-commit
         uses: pre-commit/action@v2.0.3
 
-  build:
+  build and test:
     runs-on: ubuntu-latest
     needs: validate
     name: Build Docker Image
@@ -31,15 +31,17 @@ jobs:
         uses: arduino/setup-task@v1
       - name: Build the Docker Image
         run: task build TAG=local
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    name: Run Unit Tests
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Setup Task
-        uses: arduino/setup-task@v1
       - name: Run Unit Tests
         run: task test TAG=local
+
+  # test:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   name: Run Unit Tests
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
+  #     - name: Setup Task
+  #       uses: arduino/setup-task@v1
+  #     - name: Run Unit Tests
+  #       run: task test TAG=local
