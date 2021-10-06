@@ -384,3 +384,5 @@ ENV HELM_REPOSITORY_CONFIG="/home/anvil/.config/helm/repositories.yaml"
 USER anvil
 
 CMD ["/bin/bash"]
+
+ENTRYPOINT [""]
