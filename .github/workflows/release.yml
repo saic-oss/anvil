@@ -60,6 +60,8 @@ jobs:
       - name: Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
+          file: src/docker/Dockerfile
+          context: ./src
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
