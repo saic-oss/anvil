@@ -6,6 +6,7 @@ on:
       - "*"
   release:
     types: [prereleased, published, edited]
+  pull_request:
 
 jobs:
   validate:
