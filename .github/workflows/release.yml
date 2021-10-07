@@ -63,5 +63,6 @@ jobs:
           file: src/docker/Dockerfile
           context: ./src
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: saicoss/anvil:local
+          # tags: ${{ steps.meta.outputs.tags }}
+          # labels: ${{ steps.meta.outputs.labels }}
