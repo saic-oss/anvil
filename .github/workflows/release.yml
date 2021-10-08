@@ -56,7 +56,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: saic-oss/anvil
+          images: saicoss/anvil
       - name: Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
