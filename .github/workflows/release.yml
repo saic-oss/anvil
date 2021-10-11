@@ -5,16 +5,15 @@ on:
     tags:
       - "*"
   release:
-    types: [prereleased, published]
+    types: [published]
 
 jobs:
   deliver:
     runs-on: ubuntu-latest
     name: Deliver to Docker Hub
     steps:
-      # -
-      #   name: Checkout repository
-      #   uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Extract Metadata (tags & labels)
         id: meta
         uses: docker/metadata-action@v3
@@ -30,8 +29,8 @@ jobs:
       - name: Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
+          context: .
           file: src/docker/Dockerfile
-          # context: .
           push: true
           # tags: saicoss/anvil:latest
           tags: ${{ steps.meta.outputs.tags }}
