@@ -6,7 +6,6 @@ on:
       - "*"
   release:
     types: [prereleased, published, edited]
-  pull_request:
 
 jobs:
   validate:
@@ -62,9 +61,8 @@ jobs:
       - name: Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
-          tags: saicoss/anvil:local
           file: src/docker/Dockerfile
           context: ./src
           push: true
-          # tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
