@@ -5,7 +5,7 @@ on:
     tags:
       - "*"
   release:
-    types: [prereleased, created, published, edited]
+    types: [prereleased, published]
 
 jobs:
   validate:
@@ -46,11 +46,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Extract Metadata (tags & labels)
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: saic-oss/anvil
+      # - name: Extract Metadata (tags & labels)
+      #   id: meta
+      #   uses: docker/metadata-action@v3
+      #   with:
+      #     images: saic-oss/anvil
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to Docker Hub
@@ -64,5 +64,6 @@ jobs:
           file: src/docker/Dockerfile
           context: ./src
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: saic-oss/anvil:latest
+          # tags: ${{ steps.meta.outputs.tags }}
+          # labels: ${{ steps.meta.outputs.labels }}
