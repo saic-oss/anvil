@@ -14,11 +14,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Extract Metadata (tags & labels)
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: saicoss/anvil
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      # - name: Extract Metadata (tags & labels)
+      #   id: meta
+      #   uses: docker/metadata-action@v3
+      #   with:
+      #     images: saicoss/anvil
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to Docker Hub
@@ -32,5 +34,6 @@ jobs:
           file: ./src/docker/Dockerfile
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: saicoss/anvil:latest
+          # tags: ${{ steps.meta.outputs.tags }}
+          # labels: ${{ steps.meta.outputs.labels }}
