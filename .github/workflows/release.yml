@@ -32,6 +32,6 @@ jobs:
           file: src/docker/Dockerfile
           context: ./src
           push: true
-          tags: saic-oss/anvil:latest
+          tags: ghcr.io/saic-oss/anvil:latest
           # tags: ${{ steps.meta.outputs.tags }}
           # labels: ${{ steps.meta.outputs.labels }}
