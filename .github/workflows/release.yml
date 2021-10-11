@@ -5,7 +5,7 @@ on:
     tags:
       - "*"
   release:
-    types: [prereleased, published, edited]
+    types: [prereleased, created, published, edited]
 
 jobs:
   validate:
