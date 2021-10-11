@@ -10,7 +10,6 @@ on:
 jobs:
   deliver:
     runs-on: ubuntu-latest
-    needs: test
     name: Deliver to Docker Hub
     steps:
       - name: Checkout repository
