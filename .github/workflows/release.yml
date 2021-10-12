@@ -40,4 +40,4 @@ jobs:
       - name: Build the Docker Image
         run: docker build . --file ./src/docker/Dockerfile --tag saicoss/anvil:0.17.0
       - name: Push to Docker Hub
-        run: docker push saic-oss/anvil
+        run: docker push saicoss/anvil:0.17.0
