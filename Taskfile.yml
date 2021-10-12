@@ -36,6 +36,16 @@ tasks:
     cmds:
       - docker run --rm -v $(pwd):/workdir -w /workdir {{.FULLY_QUALIFIED_IMAGE_NAME}}:{{.TAG}} shellspec
 
+  updates:
+    desc: Run automated check for updates
+    vars:
+      TAG: '{{ coalesce .TAG "<no value>" }}'
+    preconditions:
+      - sh: test "{{.TAG}}" != "<no value>"
+        msg: Required variable 'TAG' not set
+    cmds:
+      - docker run --rm -v $(pwd):/workdir -w /workdir {{.FULLY_QUALIFIED_IMAGE_NAME}}:{{.TAG}} shellspec updates
+
   codefresh:test:
     cmds:
       - shellspec
