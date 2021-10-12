@@ -38,6 +38,6 @@ jobs:
       #     tags: ${{ steps.meta.outputs.tags }}
       #     labels: ${{ steps.meta.outputs.labels }}
       - name: Build the Docker Image
-        run: docker build . --file ./src/docker/Dockerfile --tag saicoss/anvil:0.17.0
+        run: docker build -t saicoss/anvil:0.17.0 -f ./src/docker/Dockerfile .
       - name: Push to Docker Hub
         run: docker push saicoss/anvil:0.17.0
