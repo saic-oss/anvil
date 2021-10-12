@@ -44,6 +44,6 @@ jobs:
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the Docker Image
-        run: task build
+        run: docker build . --file ./src/docker/Dockerfile --tag saicoss/anvil:0.17.0
       - name: Push to Docker Hub
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/anvil
