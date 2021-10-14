@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    docker --version | grep "${DOCKER_VERSION}"
+    dnf list docker-ce | grep "${DOCKER_VERSION}"
   }
 
   It "validates tool is installed by checking version"
