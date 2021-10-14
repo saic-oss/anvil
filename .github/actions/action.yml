@@ -1,5 +1,0 @@
-name: "Build Docker Image"
-descriptions: "Builds the Docker image using the Dockerfile"
-runs:
-  using: "docker"
-  image: "../../src/docker/Dockerfile"
