@@ -20,7 +20,7 @@ ARG CONTAINERD_VERSION="1.2.13-3.1.el7"
 ENV CONTAINERD_VERSION=${CONTAINERD_VERSION}
 
 # Specify Docker version to install. Get versions using 'dnf list docker-ce --showduplicates | sort -r'
-ARG DOCKER_VERSION="19.03.15"
+ARG DOCKER_VERSION="3:19.03.13"
 ENV DOCKER_VERSION=${DOCKER_VERSION}
 
 # Intentionally do not specify versions for the tools in the Development Tools group and other
