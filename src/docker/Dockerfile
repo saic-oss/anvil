@@ -244,7 +244,7 @@ RUN asdf plugin add helm \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-diff plugin. Get versions from https://github.com/databus23/helm-diff/releases
-ARG HELM_DIFF_VERSION="3.1.2"
+ARG HELM_DIFF_VERSION="3.1.3"
 ENV HELM_DIFF_VERSION=${HELM_DIFF_VERSION}
 RUN helm plugin install https://github.com/databus23/helm-diff --version "${HELM_DIFF_VERSION}" \
   && asdf reshim helm \
