@@ -84,7 +84,7 @@ RUN wget -O /root/task.tar.gz --progress=dot:giga "https://github.com/go-task/ta
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install shellcheck. Get versions from https://github.com/koalaman/shellcheck/releases
-ARG SHELLCHECK_VERSION="0.7.1"
+ARG SHELLCHECK_VERSION="0.7.2"
 ENV SHELLCHECK_VERSION=${SHELLCHECK_VERSION}
 # hadolint ignore=DL3003
 RUN wget -O /root/shellcheck.tar.xz --progress=dot:giga "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
