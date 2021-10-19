@@ -84,7 +84,7 @@ RUN wget -O /root/task.tar.gz --progress=dot:giga "https://github.com/go-task/ta
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install shellcheck. Get versions from https://github.com/koalaman/shellcheck/releases
-ARG SHELLCHECK_VERSION="0.7.1"
+ARG SHELLCHECK_VERSION="0.7.2"
 ENV SHELLCHECK_VERSION=${SHELLCHECK_VERSION}
 # hadolint ignore=DL3003
 RUN wget -O /root/shellcheck.tar.xz --progress=dot:giga "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
@@ -159,7 +159,7 @@ USER anvil
 WORKDIR /home/anvil
 
 # Install asdf. Get versions from https://github.com/asdf-vm/asdf/releases
-ARG ASDF_VERSION="0.8.0"
+ARG ASDF_VERSION="0.8.1"
 ENV ASDF_VERSION=${ASDF_VERSION}
 # hadolint ignore=SC2016
 RUN git clone --branch "v${ASDF_VERSION}" --depth 1 https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" \
@@ -244,7 +244,7 @@ RUN asdf plugin add helm \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-diff plugin. Get versions from https://github.com/databus23/helm-diff/releases
-ARG HELM_DIFF_VERSION="3.1.2"
+ARG HELM_DIFF_VERSION="3.1.3"
 ENV HELM_DIFF_VERSION=${HELM_DIFF_VERSION}
 RUN helm plugin install https://github.com/databus23/helm-diff --version "${HELM_DIFF_VERSION}" \
   && asdf reshim helm \
@@ -359,7 +359,7 @@ RUN go get -u github.com/go-critic/go-critic/cmd/gocritic \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install sonarscanner. Get versions using 'asdf list all sonarscanner'
-ARG SONARSCANNER_VERSION="4.6.0.2311"
+ARG SONARSCANNER_VERSION="4.6.2.2472"
 ENV SONARSCANNER_VERSION=${SONARSCANNER_VERSION}
 RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonarscanner.git \
   && asdf install sonarscanner "${SONARSCANNER_VERSION}" \
