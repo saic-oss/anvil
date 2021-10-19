@@ -159,7 +159,7 @@ USER anvil
 WORKDIR /home/anvil
 
 # Install asdf. Get versions from https://github.com/asdf-vm/asdf/releases
-ARG ASDF_VERSION="0.8.0"
+ARG ASDF_VERSION="0.8.1"
 ENV ASDF_VERSION=${ASDF_VERSION}
 # hadolint ignore=SC2016
 RUN git clone --branch "v${ASDF_VERSION}" --depth 1 https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" \
