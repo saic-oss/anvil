@@ -236,7 +236,7 @@ RUN asdf plugin add kubectl \
 
 # Install Helm. Get versions using 'asdf list all helm'.
 # Note: Please don't use Helm 2. Friends don't let friends use Tiller.
-ARG HELM_VERSION="3.6.3"
+ARG HELM_VERSION="3.7.1"
 ENV HELM_VERSION=${HELM_VERSION}
 RUN asdf plugin add helm \
   && asdf install helm "${HELM_VERSION}" \
@@ -251,7 +251,7 @@ RUN helm plugin install https://github.com/databus23/helm-diff --version "${HELM
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-git plugin. Get versions from https://github.com/aslafy-z/helm-git/releases
-ARG HELM_GIT_VERSION="0.8.1"
+ARG HELM_GIT_VERSION="0.11.1"
 ENV HELM_GIT_VERSION=${HELM_GIT_VERSION}
 RUN helm plugin install https://github.com/aslafy-z/helm-git.git --version "${HELM_GIT_VERSION}" \
   && asdf reshim helm \
@@ -265,7 +265,7 @@ RUN helm plugin install https://github.com/hypnoglow/helm-s3.git --version "${HE
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helmfile. Get versions using 'asdf list all helmfile'.
-ARG HELMFILE_VERSION="0.138.2"
+ARG HELMFILE_VERSION="0.141.0"
 ENV HELMFILE_VERSION=${HELMFILE_VERSION}
 RUN asdf plugin add helmfile \
   && asdf install helmfile "${HELMFILE_VERSION}" \
@@ -313,7 +313,7 @@ RUN asdf plugin add maven \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install chart-releaser. Get versions using 'asdf list all helm-cr'
-ARG CHART_RELEASER_VERSION="1.1.1"
+ARG CHART_RELEASER_VERSION="1.2.1"
 ENV CHART_RELEASER_VERSION=${CHART_RELEASER_VERSION}
 RUN asdf plugin add helm-cr \
   && asdf install helm-cr "${CHART_RELEASER_VERSION}" \
