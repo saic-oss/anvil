@@ -2,12 +2,12 @@
 
 Describe "printVersion()"
   printVersion() {
-    skopeo -v | grep "${SKOPEO_BINARY_VERSION}"
+    skopeo -v | grep "${SKOPEO_VERSION}"
   }
 
   It "validates tool is installed by checking version"
     When call printVersion
-    The output should include "${SKOPEO_BINARY_VERSION}"
+    The output should include "${SKOPEO_VERSION}"
     The status should eq 0
   End
 End

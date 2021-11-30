@@ -131,7 +131,7 @@ RUN wget -O /usr/local/bin/docker-compose --progress=dot:giga "https://github.co
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Podman. Get available versions by running the command `dnf list podman`
-ARG PODMAN_VERSION="3.2.3"
+ARG PODMAN_VERSION="3.3.1"
 ENV PODMAN_VERSION=${PODMAN_VERSION}
 RUN dnf -y install podman-${PODMAN_VERSION} \
   && dnf clean all \
@@ -139,13 +139,8 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Skopeo. Get available versions by running the command `dnf list skopeo`
-ARG SKOPEO_VERSION="1.3.1"
+ARG SKOPEO_VERSION="1.4.2"
 ENV SKOPEO_VERSION=${SKOPEO_VERSION}
-
-# A seperate binary version needs to be set because, for some unknown reason, skopeo's package verion and binary version are different.
-# This is caused by Red Hat's packaging and there isn't much we can do about it.
-ARG SKOPEO_BINARY_VERSION="1.3.2"
-ENV SKOPEO_BINARY_VERSION=${SKOPEO_BINARY_VERSION}
 
 RUN dnf -y install skopeo-${SKOPEO_VERSION} \
   && dnf clean all \
@@ -251,7 +246,7 @@ RUN helm plugin install https://github.com/databus23/helm-diff --version "${HELM
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-git plugin. Get versions from https://github.com/aslafy-z/helm-git/releases
-ARG HELM_GIT_VERSION="0.8.1"
+ARG HELM_GIT_VERSION="0.11.1"
 ENV HELM_GIT_VERSION=${HELM_GIT_VERSION}
 RUN helm plugin install https://github.com/aslafy-z/helm-git.git --version "${HELM_GIT_VERSION}" \
   && asdf reshim helm \
