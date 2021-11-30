@@ -131,7 +131,7 @@ RUN wget -O /usr/local/bin/docker-compose --progress=dot:giga "https://github.co
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Podman. Get available versions by running the command `dnf list podman`
-ARG PODMAN_VERSION="3.2.3"
+ARG PODMAN_VERSION="3.3.1"
 ENV PODMAN_VERSION=${PODMAN_VERSION}
 RUN dnf -y install podman-${PODMAN_VERSION} \
   && dnf clean all \
