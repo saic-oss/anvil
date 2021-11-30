@@ -139,7 +139,7 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Skopeo. Get available versions by running the command `dnf list skopeo`
-ARG SKOPEO_VERSION="1.3.1"
+ARG SKOPEO_VERSION="1.4.2"
 ENV SKOPEO_VERSION=${SKOPEO_VERSION}
 
 # A seperate binary version needs to be set because, for some unknown reason, skopeo's package verion and binary version are different.
