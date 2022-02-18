@@ -172,7 +172,6 @@ ENV PATH="/home/anvil/.asdf/shims:/home/anvil/.asdf/bin:${PATH}"
 ARG NODEJS_VERSION="12.18.3"
 ENV NODEJS_VERSION=${NODEJS_VERSION}
 RUN asdf plugin add nodejs \
-  && bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring \
   && asdf install nodejs "${NODEJS_VERSION}" \
   && asdf global nodejs "${NODEJS_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
