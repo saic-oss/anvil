@@ -364,7 +364,7 @@ RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonar
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install serverless. Get versions from https://github.com/serverless/serverless/releases
-ARG SERVERLESS_VERSION="2.54.0"
+ARG SERVERLESS_VERSION="3.3.0"
 ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
 RUN npm install -g serverless@${SERVERLESS_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
