@@ -23,6 +23,9 @@ ENV CONTAINERD_VERSION=${CONTAINERD_VERSION}
 ARG DOCKER_VERSION="3:19.03.13"
 ENV DOCKER_VERSION=${DOCKER_VERSION}
 
+RUN rpm -i 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-3.el8.noarch.rpm' \
+  && dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos
+
 # Intentionally do not specify versions for the tools in the Development Tools group and other
 # base packages, so that we always get the latest version. These packages are very stable and
 # shouldn't ever need version pinning
@@ -169,7 +172,6 @@ ENV PATH="/home/anvil/.asdf/shims:/home/anvil/.asdf/bin:${PATH}"
 ARG NODEJS_VERSION="12.18.3"
 ENV NODEJS_VERSION=${NODEJS_VERSION}
 RUN asdf plugin add nodejs \
-  && bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring \
   && asdf install nodejs "${NODEJS_VERSION}" \
   && asdf global nodejs "${NODEJS_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
