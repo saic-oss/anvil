@@ -350,13 +350,13 @@ RUN go get -u golang.org/x/lint/golint \
 # Install gocyclo. "go get" doesn't really support specifying versions, so we just get the latest
 ARG GOCYCLO_VERSION="v0.6.0"
 ENV GOCYCLO_VERSION=${GOCYCLO_VERSION}
-RUN go install github.com/fzipp/gocyclo/cmd/gocyclo@${SONARSCANNER_VERSION} \
+RUN go install github.com/fzipp/gocyclo/cmd/gocyclo@"${GOCYCLO_VERSION}"" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install gocritic. "go get" doesn't really support specifying versions, so we just get the latest
 ARG GOCRITIC_VERSION="v0.6.3"
 ENV GOCRITIC_VERSION=${GOCRITIC_VERSION}
-RUN go install github.com/go-critic/go-critic/cmd/gocritic@${GOCRITIC_VERSION} \
+RUN go install github.com/go-critic/go-critic/cmd/gocritic@"${GOCRITIC_VERSION}"" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install sonarscanner. Get versions using 'asdf list all sonarscanner'
