@@ -369,6 +369,13 @@ ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
 RUN npm install -g serverless@${SERVERLESS_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
+# Install ruby. Get versions using 'asdf list all ruby'
+ARG RUBY_VERSION="3.1.2"
+ENV RUBY_VERSION=${RUBY_VERSION}
+RUN asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git \
+  && asdf install ruby "${RUBY_VERSION}" \
+  && asdf global ruby "${RUBY_VERSION}" \
+  && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Support tools installed as anvil when running as root user
 USER root
