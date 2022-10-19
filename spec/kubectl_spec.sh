@@ -2,7 +2,7 @@
 
 Describe "printVersion()"
   printVersion() {
-    kubectl version --client=true | grep "${KUBECTL_VERSION}"
+    kubectl version --client=true --output=yaml | grep "${KUBECTL_VERSION}"
   }
 
   It "validates tool is installed by checking version"
