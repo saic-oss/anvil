@@ -332,7 +332,6 @@ ENV PATH="${PATH}:${GOPATH}/bin"
 # Install golangci-lint. Get versions using asdf list all golangci-lint
 ARG GOLANGCI_LINT_VERSION="1.50.0"
 ENV GOLANGCI_LINT_VERSION=${GOLANGCI_LINT_VERSION}
-#   asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lint.git
 RUN asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lint.git \
   && asdf install golangci-lint "${GOLANGCI_LINT_VERSION}" \
   && asdf global golangci-lint "${GOLANGCI_LINT_VERSION}" \
