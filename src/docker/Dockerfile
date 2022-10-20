@@ -127,7 +127,7 @@ RUN wget -O /usr/local/bin/gomplate --progress=dot:giga "https://github.com/hair
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
-ARG DOCKER_COMPOSE_VERSION="2.11.2"
+ARG DOCKER_COMPOSE_VERSION="2.12.0"
 ENV DOCKER_COMPOSE_VERSION=${DOCKER_COMPOSE_VERSION}
 RUN wget -O /usr/local/bin/docker-compose --progress=dot:giga "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64" \
   && chmod +x /usr/local/bin/docker-compose \
@@ -199,11 +199,12 @@ RUN pip install --no-cache-dir "pre-commit==${PRE_COMMIT_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Install aws cli. Get versions using pip install awscli=='
-ARG AWS_CLI_VERSION="1.25.93"
+# Install aws cli. Get versions using 'asdf list all awscli'
+ARG AWS_CLI_VERSION="2.8.4"
 ENV AWS_CLI_VERSION=${AWS_CLI_VERSION}
-RUN pip install --no-cache-dir "awscli==${AWS_CLI_VERSION}" \
-  && asdf reshim python \
+RUN asdf plugin add awscli \
+  && asdf install awscli "${AWS_CLI_VERSION}" \
+  && asdf global awscli "${AWS_CLI_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Java. Get versions using 'asdf list all java'
@@ -263,7 +264,7 @@ RUN helm plugin install https://github.com/hypnoglow/helm-s3.git --version "${HE
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helmfile. Get versions using 'asdf list all helmfile'.
-ARG HELMFILE_VERSION="0.144.0"
+ARG HELMFILE_VERSION="0.147.0"
 ENV HELMFILE_VERSION=${HELMFILE_VERSION}
 RUN asdf plugin add helmfile \
   && asdf install helmfile "${HELMFILE_VERSION}" \
@@ -271,7 +272,7 @@ RUN asdf plugin add helmfile \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Terraform. Get versions using 'asdf list all terraform'
-ARG TERRAFORM_VERSION="1.3.2"
+ARG TERRAFORM_VERSION="1.3.3"
 ENV TERRAFORM_VERSION=${TERRAFORM_VERSION}
 RUN asdf plugin add terraform \
   && asdf install terraform "${TERRAFORM_VERSION}" \
@@ -338,7 +339,7 @@ RUN asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lin
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install goreleaser. Get versions using 'asdf list all goreleaser'
-ARG GORELEASER_VERSION="1.12.1"
+ARG GORELEASER_VERSION="1.12.3"
 ENV GORELEASER_VERSION=${GORELEASER_VERSION}
 RUN asdf plugin-add goreleaser https://github.com/kforsthoevel/asdf-goreleaser.git \
   && asdf install goreleaser "${GORELEASER_VERSION}" \
