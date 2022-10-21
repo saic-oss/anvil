@@ -1,9 +1,10 @@
 #!/usr/bin/env shellspec
 
-#shellcheck shell=sh
+set -eu
 
-# set -eu
-
-# shellspec_spec_helper_configure() {
-#   shellspec_import 'support/custom_matcher'
-# }
+spec_helper_precheck() {
+  minimum_version "0.28.1"
+  if [ "$SHELL_TYPE" != "bash" ]; then
+    abort "Only bash is supported."
+  fi
+}

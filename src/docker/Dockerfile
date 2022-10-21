@@ -16,11 +16,11 @@ USER root
 # but the support for running Podman/Buildah inside a container is very weak.
 # An earlier version of containerd.io is available, but it limits the version of Docker that you are able
 # to install and it is also vulnerable to CVE RHSA-2020:0348
-ARG CONTAINERD_VERSION="1.2.13-3.1.el7"
+ARG CONTAINERD_VERSION="1.6.8-3.1.el7"
 ENV CONTAINERD_VERSION=${CONTAINERD_VERSION}
 
 # Specify Docker version to install. Get versions using 'dnf list docker-ce --showduplicates | sort -r'
-ARG DOCKER_VERSION="3:19.03.13"
+ARG DOCKER_VERSION="3:20.10.9"
 ENV DOCKER_VERSION=${DOCKER_VERSION}
 
 RUN rpm -i 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-3.el8.noarch.rpm' \
@@ -70,7 +70,7 @@ RUN dnf install -y "https://download.docker.com/linux/centos/7/x86_64/stable/Pac
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install shellspec. Get versions from https://github.com/shellspec/shellspec/releases
-ARG SHELLSPEC_VERSION="0.22.0"
+ARG SHELLSPEC_VERSION="0.28.1"
 ENV SHELLSPEC_VERSION=${SHELLSPEC_VERSION}
 # hadolint ignore=DL3003
 RUN git clone --branch "${SHELLSPEC_VERSION}" --depth 1 https://github.com/shellspec/shellspec.git /usr/local/src/shellspec \
@@ -78,7 +78,7 @@ RUN git clone --branch "${SHELLSPEC_VERSION}" --depth 1 https://github.com/shell
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install go-task. Get versions from https://github.com/go-task/task/releases
-ARG GO_TASK_VERSION="3.0.0"
+ARG GO_TASK_VERSION="3.17.0"
 ENV GO_TASK_VERSION=${GO_TASK_VERSION}
 # hadolint ignore=DL3003
 RUN wget -O /root/task.tar.gz --progress=dot:giga "https://github.com/go-task/task/releases/download/v${GO_TASK_VERSION}/task_linux_amd64.tar.gz" \
@@ -87,7 +87,7 @@ RUN wget -O /root/task.tar.gz --progress=dot:giga "https://github.com/go-task/ta
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install shellcheck. Get versions from https://github.com/koalaman/shellcheck/releases
-ARG SHELLCHECK_VERSION="0.7.2"
+ARG SHELLCHECK_VERSION="0.8.0"
 ENV SHELLCHECK_VERSION=${SHELLCHECK_VERSION}
 # hadolint ignore=DL3003
 RUN wget -O /root/shellcheck.tar.xz --progress=dot:giga "https://github.com/koalaman/shellcheck/releases/download/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
@@ -96,7 +96,7 @@ RUN wget -O /root/shellcheck.tar.xz --progress=dot:giga "https://github.com/koal
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install hadolint. Get versions from https://github.com/hadolint/hadolint/releases
-ARG HADOLINT_VERSION="1.18.0"
+ARG HADOLINT_VERSION="2.10.0"
 ENV HADOLINT_VERSION=${HADOLINT_VERSION}
 RUN wget -O /usr/local/bin/hadolint --progress=dot:giga "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-Linux-x86_64" \
   && chmod +x /usr/local/bin/hadolint \
@@ -110,31 +110,31 @@ RUN wget -O /usr/local/bin/klar --progress=dot:giga "https://github.com/optiopay
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Fossa cli. Get versions from https://github.com/fossas/fossa-cli/releases
-ARG FOSSA_VERSION="1.0.30"
+ARG FOSSA_VERSION="3.4.11"
 ENV FOSSA_VERSION=${FOSSA_VERSION}
 # hadolint ignore=DL3003
-RUN wget -O /root/fossa.tar.gz --progress=dot:giga "https://github.com/fossas/fossa-cli/releases/download/v${FOSSA_VERSION}/fossa-cli_${FOSSA_VERSION}_linux_amd64.tar.gz" \
+RUN wget -O /root/fossa.tar.gz --progress=dot:giga "https://github.com/fossas/fossa-cli/releases/download/v${FOSSA_VERSION}/fossa_${FOSSA_VERSION}_linux_amd64.tar.gz" \
   && (cd /usr/local/bin && tar -xzvf /root/fossa.tar.gz fossa) \
   && chmod +x /usr/local/bin/fossa \
   && rm -f /root/fossa.tar.gz \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Gomplate. Get versions from https://github.com/hairyhenderson/gomplate/releases
-ARG GOMPLATE_VERSION="3.7.0"
+ARG GOMPLATE_VERSION="3.11.3"
 ENV GOMPLATE_VERSION=${GOMPLATE_VERSION}
 RUN wget -O /usr/local/bin/gomplate --progress=dot:giga "https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim" \
   && chmod +x /usr/local/bin/gomplate \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install docker-compose. Get versions from https://github.com/docker/compose/releases
-ARG DOCKER_COMPOSE_VERSION="1.26.2"
+ARG DOCKER_COMPOSE_VERSION="2.12.0"
 ENV DOCKER_COMPOSE_VERSION=${DOCKER_COMPOSE_VERSION}
-RUN wget -O /usr/local/bin/docker-compose --progress=dot:giga "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-x86_64" \
+RUN wget -O /usr/local/bin/docker-compose --progress=dot:giga "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64" \
   && chmod +x /usr/local/bin/docker-compose \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Podman. Get available versions by running the command `dnf list podman`
-ARG PODMAN_VERSION="3.3.1"
+ARG PODMAN_VERSION="4.2.0"
 ENV PODMAN_VERSION=${PODMAN_VERSION}
 RUN dnf -y install podman-${PODMAN_VERSION} \
   && dnf clean all \
@@ -142,7 +142,7 @@ RUN dnf -y install podman-${PODMAN_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Skopeo. Get available versions by running the command `dnf list skopeo`
-ARG SKOPEO_VERSION="1.4.2"
+ARG SKOPEO_VERSION="1.9.2"
 ENV SKOPEO_VERSION=${SKOPEO_VERSION}
 
 RUN dnf -y install skopeo-${SKOPEO_VERSION} \
@@ -157,7 +157,7 @@ USER anvil
 WORKDIR /home/anvil
 
 # Install asdf. Get versions from https://github.com/asdf-vm/asdf/releases
-ARG ASDF_VERSION="0.8.1"
+ARG ASDF_VERSION="0.10.2"
 ENV ASDF_VERSION=${ASDF_VERSION}
 # hadolint ignore=SC2016
 RUN git clone --branch "v${ASDF_VERSION}" --depth 1 https://github.com/asdf-vm/asdf.git "${HOME}/.asdf" \
@@ -169,7 +169,7 @@ RUN git clone --branch "v${ASDF_VERSION}" --depth 1 https://github.com/asdf-vm/a
 ENV PATH="/home/anvil/.asdf/shims:/home/anvil/.asdf/bin:${PATH}"
 
 # Install nodejs. Get versions using 'asdf list all nodejs'
-ARG NODEJS_VERSION="12.18.3"
+ARG NODEJS_VERSION="18.11.0"
 ENV NODEJS_VERSION=${NODEJS_VERSION}
 RUN asdf plugin add nodejs \
   && asdf install nodejs "${NODEJS_VERSION}" \
@@ -177,7 +177,7 @@ RUN asdf plugin add nodejs \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install python. Get versions using 'asdf list all python'
-ARG PYTHON_VERSION="3.8.2"
+ARG PYTHON_VERSION="3.10.8"
 ENV PYTHON_VERSION=${PYTHON_VERSION}
 RUN asdf plugin add python \
   && asdf install python "${PYTHON_VERSION}" \
@@ -186,28 +186,29 @@ RUN asdf plugin add python \
 
 # Install pipenv. Get versions using 'pip install pipenv=='
 # NOTE: PIPENV_VERSION is an env var that is used by pipenv, so it can't be used here. ref: https://github.com/pypa/pipenv/issues/3633#issuecomment-478250721
-ARG PIP_ENV_VERSION="2020.11.15"
+ARG PIP_ENV_VERSION="2022.10.12"
 ENV PIP_ENV_VERSION=${PIP_ENV_VERSION}
 RUN pip install --no-cache-dir "pipenv==${PIP_ENV_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install pre-commit. Get versions using 'pip install pre-commit=='
-ARG PRE_COMMIT_VERSION="2.7.1"
+ARG PRE_COMMIT_VERSION="2.20.0"
 ENV PRE_COMMIT_VERSION=${PRE_COMMIT_VERSION}
 RUN pip install --no-cache-dir "pre-commit==${PRE_COMMIT_VERSION}" \
   && asdf reshim python \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Install aws cli. Get versions using pip install awscli=='
-ARG AWS_CLI_VERSION="1.18.108"
+# Install aws cli. Get versions using 'asdf list all awscli'
+ARG AWS_CLI_VERSION="2.8.4"
 ENV AWS_CLI_VERSION=${AWS_CLI_VERSION}
-RUN pip install --no-cache-dir "awscli==${AWS_CLI_VERSION}" \
-  && asdf reshim python \
+RUN asdf plugin add awscli \
+  && asdf install awscli "${AWS_CLI_VERSION}" \
+  && asdf global awscli "${AWS_CLI_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Java. Get versions using 'asdf list all java'
-ARG JAVA_VERSION="adoptopenjdk-11.0.8+10"
+ARG JAVA_VERSION="adoptopenjdk-19.0.0+36"
 ENV JAVA_VERSION=${JAVA_VERSION}
 RUN asdf plugin add java \
   && asdf install java "${JAVA_VERSION}" \
@@ -221,10 +222,11 @@ RUN asdf plugin add java \
 # Multiple versions of kubectl are installed. You can choose which one to use by using 'asdf local kubectl X.Y.Z'.
 # It will create a file called '.tool-versions' that asdf will look for.
 # The env var KUBECTL_VERSION is used to set the global version of kubectl.
-ARG KUBECTL_VERSION="1.18"
+ARG KUBECTL_VERSION="1.25.3"
 ENV KUBECTL_VERSION=${KUBECTL_VERSION}
 RUN asdf plugin add kubectl \
   && asdf install kubectl "$(asdf list all kubectl 1.17 | tail -1)" \
+  && asdf install kubectl "$(asdf list all kubectl 1.18 | tail -1)" \
   && asdf install kubectl "$(asdf list all kubectl 1.19 | tail -1)" \
   && asdf install kubectl "$(asdf list all kubectl 1.20 | tail -1)" \
   && asdf install kubectl "$(asdf list all kubectl ${KUBECTL_VERSION} | tail -1)" \
@@ -233,7 +235,7 @@ RUN asdf plugin add kubectl \
 
 # Install Helm. Get versions using 'asdf list all helm'.
 # Note: Please don't use Helm 2. Friends don't let friends use Tiller.
-ARG HELM_VERSION="3.6.3"
+ARG HELM_VERSION="3.10.1"
 ENV HELM_VERSION=${HELM_VERSION}
 RUN asdf plugin add helm \
   && asdf install helm "${HELM_VERSION}" \
@@ -241,28 +243,28 @@ RUN asdf plugin add helm \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-diff plugin. Get versions from https://github.com/databus23/helm-diff/releases
-ARG HELM_DIFF_VERSION="3.1.3"
+ARG HELM_DIFF_VERSION="3.6.0"
 ENV HELM_DIFF_VERSION=${HELM_DIFF_VERSION}
 RUN helm plugin install https://github.com/databus23/helm-diff --version "${HELM_DIFF_VERSION}" \
   && asdf reshim helm \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-git plugin. Get versions from https://github.com/aslafy-z/helm-git/releases
-ARG HELM_GIT_VERSION="0.11.1"
+ARG HELM_GIT_VERSION="0.13.0"
 ENV HELM_GIT_VERSION=${HELM_GIT_VERSION}
 RUN helm plugin install https://github.com/aslafy-z/helm-git.git --version "${HELM_GIT_VERSION}" \
   && asdf reshim helm \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helm-s3 plugin. Get versions from https://github.com/hypnoglow/helm-s3/releases
-ARG HELM_S3_VERSION="0.10.0"
+ARG HELM_S3_VERSION="0.14.0"
 ENV HELM_S3_VERSION=${HELM_S3_VERSION}
 RUN helm plugin install https://github.com/hypnoglow/helm-s3.git --version "${HELM_S3_VERSION}" \
   && asdf reshim helm \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install helmfile. Get versions using 'asdf list all helmfile'.
-ARG HELMFILE_VERSION="0.138.2"
+ARG HELMFILE_VERSION="0.147.0"
 ENV HELMFILE_VERSION=${HELMFILE_VERSION}
 RUN asdf plugin add helmfile \
   && asdf install helmfile "${HELMFILE_VERSION}" \
@@ -270,7 +272,7 @@ RUN asdf plugin add helmfile \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Terraform. Get versions using 'asdf list all terraform'
-ARG TERRAFORM_VERSION="0.15.4"
+ARG TERRAFORM_VERSION="1.3.3"
 ENV TERRAFORM_VERSION=${TERRAFORM_VERSION}
 RUN asdf plugin add terraform \
   && asdf install terraform "${TERRAFORM_VERSION}" \
@@ -278,7 +280,7 @@ RUN asdf plugin add terraform \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install terraform-docs. Get versions using 'asdf list all terraform-docs'
-ARG TERRAFORM_DOCS_VERSION="0.12.1"
+ARG TERRAFORM_DOCS_VERSION="0.16.0"
 ENV TERRAFORM_DOCS_VERSION=${TERRAFORM_DOCS_VERSION}
 RUN asdf plugin add terraform-docs \
   && asdf install terraform-docs "${TERRAFORM_DOCS_VERSION}" \
@@ -286,7 +288,7 @@ RUN asdf plugin add terraform-docs \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install tflint. Get versions using 'asdf list all tflint'
-ARG TFLINT_VERSION="0.28.1"
+ARG TFLINT_VERSION="0.41.0"
 ENV TFLINT_VERSION=${TFLINT_VERSION}
 RUN asdf plugin add tflint \
   && asdf install tflint "${TFLINT_VERSION}" \
@@ -294,7 +296,7 @@ RUN asdf plugin add tflint \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install tfsec. Get versions using 'asdf list all tfsec'
-ARG TFSEC_VERSION="0.39.37"
+ARG TFSEC_VERSION="1.28.0"
 ENV TFSEC_VERSION=${TFSEC_VERSION}
 RUN asdf plugin add tfsec \
   && asdf install tfsec "${TFSEC_VERSION}" \
@@ -302,7 +304,7 @@ RUN asdf plugin add tfsec \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install Apache Maven.  Get versions using 'asdf list all maven'
-ARG MAVEN_VERSION="3.6.3"
+ARG MAVEN_VERSION="3.8.6"
 ENV MAVEN_VERSION=${MAVEN_VERSION}
 RUN asdf plugin add maven \
   && asdf install maven "${MAVEN_VERSION}" \
@@ -310,7 +312,7 @@ RUN asdf plugin add maven \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install chart-releaser. Get versions using 'asdf list all helm-cr'
-ARG CHART_RELEASER_VERSION="1.1.1"
+ARG CHART_RELEASER_VERSION="1.4.1"
 ENV CHART_RELEASER_VERSION=${CHART_RELEASER_VERSION}
 RUN asdf plugin add helm-cr \
   && asdf install helm-cr "${CHART_RELEASER_VERSION}" \
@@ -318,7 +320,7 @@ RUN asdf plugin add helm-cr \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install golang. Get versions using 'asdf list all golang'
-ARG GO_VERSION="1.16.7"
+ARG GO_VERSION="1.19.2"
 ENV GO_VERSION=${GO_VERSION}
 RUN asdf plugin-add golang https://github.com/kennyp/asdf-golang.git \
   && asdf install golang "${GO_VERSION}" \
@@ -328,7 +330,7 @@ ENV GOPATH="/home/anvil/go"
 ENV PATH="${PATH}:${GOPATH}/bin"
 
 # Install golangci-lint. Get versions using asdf list all golangci-lint
-ARG GOLANGCI_LINT_VERSION="1.41.1"
+ARG GOLANGCI_LINT_VERSION="1.50.0"
 ENV GOLANGCI_LINT_VERSION=${GOLANGCI_LINT_VERSION}
 RUN asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lint.git \
   && asdf install golangci-lint "${GOLANGCI_LINT_VERSION}" \
@@ -336,31 +338,31 @@ RUN asdf plugin add golangci-lint https://github.com/hypnoglow/asdf-golangci-lin
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install goreleaser. Get versions using 'asdf list all goreleaser'
-ARG GORELEASER_VERSION="0.151.1"
+ARG GORELEASER_VERSION="1.12.3"
 ENV GORELEASER_VERSION=${GORELEASER_VERSION}
 RUN asdf plugin-add goreleaser https://github.com/kforsthoevel/asdf-goreleaser.git \
   && asdf install goreleaser "${GORELEASER_VERSION}" \
   && asdf global goreleaser "${GORELEASER_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Install golint. "go get" doesn't really support specifying versions, so we just get the latest
-RUN go get -u golang.org/x/lint/golint \
+# Install golint. Note that golint doesn't really seem to have have versions, so we just get the latest
+RUN go install golang.org/x/lint/golint@latest \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Install gocyclo. "go get" doesn't really support specifying versions, so we just get the latest
+# Install gocyclo.
 ARG GOCYCLO_VERSION="v0.6.0"
 ENV GOCYCLO_VERSION=${GOCYCLO_VERSION}
 RUN go install github.com/fzipp/gocyclo/cmd/gocyclo@"${GOCYCLO_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
-# Install gocritic. "go get" doesn't really support specifying versions, so we just get the latest
-ARG GOCRITIC_VERSION="v0.6.3"
+# Install gocritic.
+ARG GOCRITIC_VERSION="v0.6.5"
 ENV GOCRITIC_VERSION=${GOCRITIC_VERSION}
 RUN go install github.com/go-critic/go-critic/cmd/gocritic@"${GOCRITIC_VERSION}" \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install sonarscanner. Get versions using 'asdf list all sonarscanner'
-ARG SONARSCANNER_VERSION="4.6.2.2472"
+ARG SONARSCANNER_VERSION="4.7.0.2747"
 ENV SONARSCANNER_VERSION=${SONARSCANNER_VERSION}
 RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonarscanner.git \
   && asdf install sonarscanner "${SONARSCANNER_VERSION}" \
@@ -368,7 +370,7 @@ RUN asdf plugin-add sonarscanner https://github.com/virtualstaticvoid/asdf-sonar
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
 
 # Install serverless. Get versions from https://github.com/serverless/serverless/releases
-ARG SERVERLESS_VERSION="3.3.0"
+ARG SERVERLESS_VERSION="3.23.0"
 ENV SERVERLESS_VERSION=${SERVERLESS_VERSION}
 RUN npm install -g serverless@${SERVERLESS_VERSION} \
   && rm -rf /var/tmp/* /tmp/* /var/tmp/.???* /tmp/.???*
